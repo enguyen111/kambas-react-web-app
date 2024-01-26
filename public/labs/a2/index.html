@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link href="/libs/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="container-fluid">
+    <h1>Assignment 2 - CSS</h1>
+
+
+    <h2>BootStrap Grid System</h2>
+    <div class="row">
+        <div class="col">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="col">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="col">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="col-10">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="col-1">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="col-lg-9">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div class="d-none d-lg-block">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+    </div>
+    <h2>Flex Resize Width</h2>
+    <div class="wd-flex-row-container">
+        <div class="wd-bg-color-yellow wd-width-75px">
+            Column 1
+        </div>
+        <div class="wd-bg-color-blue">Column 2</div>
+        <div class="wd-bg-color-red wd-flex-grow-1">
+            Column 3
+        </div>
+    </div>
+
+
+    <h2>Flex Grow 1</h2>
+    <div class="wd-flex-row-container">
+        <div class="wd-bg-color-yellow">Column 1</div>
+        <div class="wd-bg-color-blue">Column 2</div>
+        <div class="wd-bg-color-red wd-flex-grow-1">
+            Column 3
+        </div>
+    </div>
+
+
+    <h2>Flex</h2>
+    <div class="wd-flex-row-container">
+        <div class="wd-bg-color-yellow">Column 1</div>
+        <div class="wd-bg-color-blue">Column 2</div>
+        <div class="wd-bg-color-red">Column 3</div>
+    </div>
+
+
+    <h2>Float Text</h2>
+
+    <div>
+        <div style="width: 50%; float:left;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </div>
+        <div style="width: 50%; float:right;">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+        </div>
+    </div>
+    <br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+    <h2>Float</h2>
+
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        <img style="width: 50%; float: right"
+             src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg">
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+
+    <h2>Z index</h2>
+    <p>Everything is assumed to have z = 0, aka same z-index. You can modify the value of objects to move it forward or
+        back in z</p>
+    <div class="wd-pos-relative">
+        <div class="wd-pos-absolute-10-10
+        wd-bg-color-yellow
+        wd-dimension-portrait">
+            Portrait
+        </div>
+        <div class="wd-zindex-bring-to-front
+        wd-pos-absolute-50-50
+        wd-bg-color-blue wd-fg-color-white
+        wd-dimension-landscape">
+            Landscape
+        </div>
+        <div class="wd-pos-absolute-120-20
+        wd-bg-color-red wd-dimension-square">
+            Square
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/>
+
+    <h3>Fixed position</h3>
+
+    Checkout the blue square that says
+    "Fixed position" stuck all the way
+    on the right and halfway down the
+    page. It doesn't scroll with the
+    rest of the page. Its position is
+    "Fixed".
+
+    <div class="wd-pos-fixed
+            wd-dimension-square
+            wd-bg-color-blue
+            wd-fg-color-white">
+        Scroll to see what happens, locked to screen
+    </div>
+
+    <h3>Absolute position</h3>
+    <div class="wd-pos-relative">
+        <div class="wd-pos-absolute-10-10
+    wd-bg-color-yellow wd-dimension-portrait">
+            Portrait
+        </div>
+        <div class="wd-pos-absolute-50-50
+        wd-bg-color-blue wd-fg-color-white
+        wd-dimension-landscape">
+            Landscape
+        </div>
+        <div class="wd-pos-absolute-120-20
+        wd-bg-color-red wd-dimension-square">
+            Square
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/>
+
+    <h2>Position</h2>
+    <h3>Relative</h3>
+    <div>
+        <div class="wd-bg-color-yellow
+             wd-dimension-portrait">
+            <div class="wd-pos-relative-nudge-down-right">
+                Portrait
+            </div>
+        </div>
+        <div class="wd-pos-relative-nudge-up-right
+             wd-bg-color-blue wd-fg-color-white
+             wd-dimension-landscape">
+            Landscape
+        </div>
+        <div class="wd-bg-color-red wd-dimension-square">
+            Square
+        </div>
+    </div>
+
+    <h2>Dimension</h2>
+    <div>
+        <div class="wd-dimension-portrait wd-bg-color-yellow">
+            Portrait
+        </div>
+        <div class="wd-dimension-landscape wd-bg-color-blue
+               wd-fg-color-white">
+            Landscape
+        </div>
+        <div class="wd-dimension-square wd-bg-color-red">
+            Square
+        </div>
+    </div>
+
+    <h3>Rounded corners</h3>
+    <p class="wd-rounded-corners-top wd-border-thin wd-border-blue wd-border-solid wd-padding-fat">
+        Rounded corners on the top
+    </p>
+
+    <p class="wd-rounded-corners-bottom wd-border-thin wd-border-blue wd-border-solid wd-padding-fat">
+        Rounded corners at the bottom
+    </p>
+    <p class="wd-rounded-corners-all-around wd-border-thin wd-border-blue wd-border-solid wd-padding-fat">
+        Rounded corners all around
+    </p>
+    <p class="wd-rounded-corners-inline wd-border-thin wd-border-blue wd-border-solid wd-padding-fat">
+        Different rounded corners
+    </p>
+
+    <h3 class="wd-bg-color-blue wd-fg-color-white">Background color</h3>
+    <p class="wd-bg-color-red wd-fg-color-black">
+        This background of this paragraph is red but
+        <span class="wd-bg-color-green wd-fg-color-white"> the background
+  of this text is green and the foreground white</span>
+    </p>
+
+    <h2>Colors</h2>
+    <h3 class="wd-fg-color-blue">Foreground color</h3>
+    <p class="wd-fg-color-red">
+        The text in this paragraph is red but
+        <span class="wd-fg-color-green">this text is green</span>
+        <button class="wd-fg-color-green">Green Text Button</button>
+    </p>
+
+    <div class="wd-selector-1">
+        <h3>Document structure selectors</h3>
+        <div class="wd-selector-2">
+            Selectors can be combined to refer elements in
+            particular places in the document
+            <p class="wd-selector-3">
+                This paragraph's red background is referenced as
+                <br/>.selector-2 .selector3<br/>
+                meaning the descendant of some ancestor.
+                <br/>
+                <span class="wd-selector-4">Whereas this span is a
+     direct child of its parent</span>
+                <br/>
+                You can combine these relationships to create
+                specific styles depending on the document
+                structure
+            </p>
+        </div>
+    </div>
+
+    <h3>Class selectors</h3>
+    <p class="wd-highlight-content">
+        Instead of using IDs to refer
+        to elements, you can use an
+        element's CLASS attribute</p>
+    <h4 class="wd-highlight-content">
+        This heading has same style as
+        paragraph above</h4>
+
+    <h2>Style Attribute</h2>
+    <p id="p1">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum.
+    </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.</p>
+</div>
+</body>
+
+
+</html>
