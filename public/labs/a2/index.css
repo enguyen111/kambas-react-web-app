@@ -166,3 +166,44 @@ p#p1 {
 .wd-width-75px {
     width: 75px;
 }
+
+
+
+.div-float-left {
+    float: left;
+    padding: 10px;
+    border: 3px solid #73AD21;
+}
+
+.div-example-text {
+    padding: 10px;
+    border: 3px solid blue;
+}
+
+.div-clear-left {
+    padding: 10px;
+    border: 3px solid blue;
+    clear: left;
+}
+
+.div-float-right {
+    float: right;
+    padding: 30px;
+    border: 3px solid #73AD21;
+    clear: right;
+}
+
+.div-clear-right {
+    float: right;
+    padding: 10px;
+    border: 3px solid blue;
+}
+
+.div-float-right-with-dimensions {
+    float: right;
+    height: 300px;
+    width: 500px;
+    padding: 30px;
+    border: 3px solid #73AD21;
+    clear: right;
+}
