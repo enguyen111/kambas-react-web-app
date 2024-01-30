@@ -103,8 +103,8 @@ p#p1 {
 
 .wd-pos-relative-nudge-up-right {
     position: relative;
-    bottom: 30px;
-    left: 30px;
+    bottom: -30px;
+    left: 50px;
 }
 .wd-pos-relative-nudge-down-right {
     position: relative;
