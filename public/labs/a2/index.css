@@ -251,3 +251,7 @@ p#p1 {
     width: 20%;
     float: left;
 }
+
+.continuation-prompt {
+    text-align: center;
+}
