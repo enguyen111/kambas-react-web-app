@@ -207,3 +207,47 @@ p#p1 {
     border: 3px solid #73AD21;
     clear: right;
 }
+
+.wd-grid-row {
+    clear: both;
+}
+
+.wd-grid-col-half-page {
+    width: 50%;
+    float: left;
+}
+
+.wd-grid-col-quarter-page {
+    width: 25%;
+    float: left;
+}
+.grid {
+    margin: 56px 20px 56px 56px;
+    padding: 20px 20px 20px 10px;
+    border: 10px solid black;
+}
+
+.wd-grid-col-third-page {
+    width: 33%;
+    float: left;
+}
+
+.wd-grid-col-two-thirds-page {
+    width: 67%;
+    float: left;
+}
+
+.wd-grid-col-left-sidebar {
+    width: 20%;
+    float: left;
+}
+
+.wd-grid-col-main-content {
+    width: 60%;
+    float: left;
+}
+
+.wd-grid-col-right-sidebar {
+    width: 20%;
+    float: left;
+}
