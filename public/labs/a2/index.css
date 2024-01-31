@@ -255,3 +255,13 @@ p#p1 {
 .continuation-prompt {
     text-align: center;
 }
+
+.btn-primary.override-bs {
+    background-color: #a90dfd;
+    border-color: #fd0d51;
+    border-width: 10px;
+    border-radius: 20px;
+    border-style: dashed;
+    font-size: 2em;
+    font-weight: bolder;
+}
