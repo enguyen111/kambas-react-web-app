@@ -2,12 +2,12 @@
     background-color: black;
     list-style: none;
     padding: 0px;  margin: -8px;
-    width: 84px;
+    width: 90px;
     position: fixed;
 }
 .wd-kanbas-navigation li {
-    padding: 10px;     margin-bottom: 7px;
-    margin-top: 7px;
+    padding: 8px;     margin-bottom: 5px;
+    margin-top: 10px;
     font-size: 0.8em;  text-align: center;
 }
 .wd-kanbas-navigation li.wd-active {
@@ -23,5 +23,11 @@
 .wd-kanbas-navigation a i {
     color: red;
     font-size: 2em;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
+}
+
+.wd-center-logo {
+    width: 70%;
+    margin-bottom: -2px;
+    margin-left: 5%;
 }
