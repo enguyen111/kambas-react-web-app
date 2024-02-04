@@ -5,3 +5,45 @@ body {
     display: flex;
     margin-left: 84px;
 }
+
+.d-flex-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 1em;
+}
+.half-tab {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+.header-course-color {
+    color: red;
+}
+
+.header-course-section {
+    display: inline-block;
+    margin-left: 0.5em;
+    color: dimgray;
+}
+
+.hr-container {
+    margin-left: 105px;
+}
+
+.wd-button-float-right {
+    float: right;
+    margin-right: -0.5px;
+}
+
+.wd-appearing-header {
+    background-color: black;
+    margin-left: 0;
+}
+
+.wd-appearing-text {
+    color: white;
+}
