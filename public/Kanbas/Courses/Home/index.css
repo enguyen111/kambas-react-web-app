@@ -1,0 +1,17 @@
+.wd-module-button {
+    background-color: red;
+    color: white;
+}
+.wd-publish-button {
+    background-color: green;
+    color: white;
+}
+
+.wd-coming-up {
+    float: left;
+}
+
+.wd-calendar-float {
+    float: right;
+    margin-right: 10px;
+}
