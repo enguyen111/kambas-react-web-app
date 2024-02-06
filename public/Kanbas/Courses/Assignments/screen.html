@@ -1,204 +1,591 @@
-<html>
-<head></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="/Kanbas/styles.css"/>
+  <link rel="stylesheet" href="/Kanbas/Navigation/index.css"/>
+  <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css">
+  <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css">
+  <link rel="stylesheet" href="/Kanbas/Courses/Assignments/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/cc0e223270.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
 <body>
-<table width="100%">
-  <tbody>
-  <tr>
-    <td valign="top">
-      <ul>
-        <li>
-          <a href="/Kanbas/Account/Navigation/index.html"> Account</a>
-        </li>
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Home/screen.html">Courses</a>
-        </li>
-        <li>
-          <a href="#">Calendar</a>
-        </li>
-        <li><a href="#">Inbox</a></li>
-      </ul>
-    </td>
-    <td valign="top">
-      <ul>
-        <li>
-          <a href="/Kanbas/Courses/Home/screen.html"> Home</a>
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Modules/screen.html"> Modules</a>
-        </li>
-        <li><a href="#"> Piazza</a></li>
-        <li><a href="/Kanbas/Courses/Grades/screen.html"> Grades</a></li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/screen.html">
-            Assignments</a
-          >
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Settings/screen.html"> Settings</a>
-        </li>
-      </ul>
-    </td>
-    <td valign="top">
-      <table width="100%">
-        <tbody>
-        <tr>
-          <td><input placeholder="Search for Assignments" > </td>
-          <td>
-            <button>+ Group</button>
-            <button>+ Assignment</button>
-            <select>
-              <option>Edit Assignment Dates</option>
-              <option>Assignment Group Weights</option>
-              <option>Gradescope 1.3</option>
-            </select>
-          </td>
-        </tr>
-        </tbody>
-      </table>
 
-      <h4>ASSIGNMENTS 40% of Total Grade</h4>
-      <select>
-        <option>Edit</option>
-        <option>Speed Grader</option>
-        <option>Duplicate</option>
-        <option>Delete</option>
-        <option>Move To</option>
-        <option>Send To</option>
-        <option>Copy To</option>
-        <option>Share To Commons</option>
-      </select>
+<ul class="wd-kanbas-navigation d-none d-md-block">
+  <li><a href="http://northeastern.edu">
+    <img style="width: 90%" class="wd-center-logo"
+         src="/images/northeastern_logo2.jpg">
 
-      <ul>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A1 - ENV + HTML</a
-          ><br />
-          <a href="#">Multiple modules</a> | Due date: 2020-09-01
-          23:59:59 | 100pts
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A2 - CSS + BOOTSTRAP</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A3 - JavaScript + REACT</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A4 - STATE + REDUX</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A5 - NODE + SESSION</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">A6 - MONGO + MONGOOSE</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-      </ul>
+  </a></li>
+  <li><a href="/Kanbas/Account/Profile/screen.html">
+    <i class="fa-solid fa-user" style="color: white"></i><br/>Account</a>
+  </li>
+  <li>
+    <a href="/Kanbas/Dashboard/screen.html">
+      <i class="fa fa-tachometer"></i>Dashboard</a>
+  </li>
+  <li class="wd-active"><a href="/Kanbas/Courses/Home/screen.html">
+    <i class="fa-solid fa-book"></i><br/>Courses</a>
+  </li>
+  <li><a href="#"><i class="fa fa-calendar"></i>Calendar</a></li>
+  <li><a href="#">
+    <i class="fa-solid fa-envelope-open-text"></i> <br/>Inbox</a>
+  </li>
+  <li><a href="#">
+    <i class="fa-regular fa-clock"></i><br/>History</a>
+  </li>
+  <li><a href="#">
+    <i class="fa-solid fa-desktop"></i><br/>Studio</a>
+  </li>
+  <li><a href="#">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i><br/>Commons
+  </a></li>
+  <li><a href="#">
+    <i class="fa-regular fa-circle-question"></i> <br/>Help</a>
+  </li>
+</ul>
 
-      <h4>QUIZZES 10% of Total Grade</h4>
-      <select>
-        <option>Edit</option>
-        <option>Speed Grader</option>
-        <option>Duplicate</option>
-        <option>Delete</option>
-        <option>Move To</option>
-        <option>Send To</option>
-        <option>Copy To</option>
-        <option>Share To Commons</option>
-      </select>
+<div class="d-flex d-none d-md-block">
+  <div class="p-4 flex-md-fill d-flex-header">
+    <i class="fa-solid fa-bars fa-2x" style="color: red"></i>
+    <span class="tab" />
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Kanbas/Courses/Home/screen.html">CS1234.FA22.01 React JS</a></li>
+        <li class="breadcrumb-item active"  aria-current="page"><a href="/Kanbas/Courses/Assignments/screen.html"
+                                                                   id="active-breadcrumb" >Assignments </a></li>
+      </ol>
+    </nav>
 
-      <ul>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Q1 - HTML</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Q2 - CSS </a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Q3 - JavaScript + ES6</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Q4 - NODE</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Q5 - MONGO</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
+  </div>
+</div>
+<div class="student-view-button d-none d-md-block">
+  <button class="float-end"><i class="fa-solid fa-glasses" ></i> <span class="half-tab"/>Student View</button>
+</div>
+<br />
+<div class="hr-container d-none d-md-block">
+  <hr width="98%"/>
+</div>
+<div class="d-flex wd-appearing-header align-items-center text-center d-md-none">
+  <div class="col-4">
+    <a data-toggle="collapse" data-target="#mini-main-nav">
+      <i class="fa-solid fa-bars fa-2x" style="color: white"></i>
+    </a>
+  </div>
+  <div class="col-4">
+    <h5 class="header-course-color align-items-center text-center">
+      <span class="wd-appearing-text"/> CS1234.FA22.01 <br />React JS <br /> Assignments</h5>
+  </div>
+  <div class="col-4 wd-appearing-text align-items-center text-center">
+    <a data-toggle="collapse" data-target="#mini-course-nav">
+      <i class="fa-solid fa-circle-chevron-down" style="color: white">
+      </i></a>
 
-      </ul>
+  </div>
+</div>
+<div id="mini-main-nav" class="collapse d-md-none">
+  <ul class="wd-navigation">
 
-      <h4>QUIZZES 20% of Total Grade</h4>
-      <select>
-        <option>Edit</option>
-        <option>Speed Grader</option>
-        <option>Duplicate</option>
-        <option>Delete</option>
-        <option>Move To</option>
-        <option>Send To</option>
-        <option>Copy To</option>
-        <option>Share To Commons</option>
-      </select>
-
-      <ul>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Midterm</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Final </a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
-
-
-      </ul>
-
-      <h4>PROJECTS 30% of Total Grade</h4>
-      <select>
-        <option>Edit</option>
-        <option>Speed Grader</option>
-        <option>Duplicate</option>
-        <option>Delete</option>
-        <option>Move To</option>
-        <option>Send To</option>
-        <option>Copy To</option>
-        <option>Share To Commons</option>
-      </select>
-
-      <ul>
-        <li>
-          <a href="/Kanbas/Courses/Assignments/Editor/screen.html">Project</a
-          ><br />
-          <a href="#">Multiple modules</a> | Not Available yet
-        </li>
+    <li><a href="/Kanbas/Account/Profile/screen.html">
+      <i class="fa-solid fa-user"></i> <span class="tab"></span>Account</a>
+    </li>
+    <li>
+      <a href="/Kanbas/Dashboard/screen.html">
+        <i class="fa fa-tachometer"></i><span class="tab"></span>Dashboard</a>
+    </li>
+    <li><a href="/Kanbas/Courses/Home/screen.html">
+      <i class="fa-solid fa-book"></i><span class="tab"></span>Courses</a>
+    </li>
+    <li><a href="#"><i class="fa fa-calendar"></i><span class="tab"></span>Calendar</a></li>
+    <li><a href="#">
+      <i class="fa-solid fa-envelope-open-text"></i> <span class="tab"></span>Inbox</a>
+    </li>
+    <li><a href="#">
+      <i class="fa-regular fa-clock"></i><span class="tab"></span>History</a>
+    </li>
+    <li><a href="#">
+      <i class="fa-solid fa-desktop"></i><span class="tab"></span>Studio</a>
+    </li>
+    <li><a href="#">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="tab"></span>Commons
+    </a></li>
+    <li><a href="#">
+      <i class="fa-regular fa-circle-question"></i> <span class="tab"></span>Help</a>
+    </li>
+  </ul>
+</div>
+<div id="mini-course-nav" class="collapse d-md-none">
+  <ul class="wd-navigation" style="width: 130px">
+    <li>
+      <a href="/Kanbas/Courses/Home/screen.html">
+        <i class="fa-solid fa-house"></i> <span class="tab"></span>Home
+      </a></li>
+    <li>
+      <a href="/Kanbas/Courses/Modules/screen.html">
+        <i class="fa-solid fa-circle-nodes"></i> <span class="tab"></span>Modules</a>
+    </li>
+    <li><a href="http://piazza.com">
+      <i class="fa-solid fa-plug"></i> <span class="tab"></span>Piazza</a></li>
+    <li><a href="#">
+      <i class="fa-solid fa-plug"></i> <span class="tab"></span>Zoom</a></li>
+    <li>
+      <a href="/Kanbas/Courses/Assignments/screen.html">
+        <i class="fa-solid fa-book-open"><span class="half-tab"></span></i>Assignments</a>
+    </li>
+    <li><a href="#">
+      <i class="fa-solid fa-rocket"></i><span class="tab"></span>Quizzes</a></li>
+    <li><a href="/Kanbas/Courses/Grades/screen.html">
+      <i class="fa-solid fa-check"></i><span class="tab"></span>Grades</a></li>
+    <li><a href="#">
+      <i class="fa-solid fa-person"></i><span class="tab"></span>People</a></li>
+  </ul>
+</div>
 
 
 
-      </ul>
 
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="d-flex">
+
+  <div class="d-none d-md-block">
+    <ul class="wd-navigation">
+      <li>
+        <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+      <li >
+        <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+      </li>
+      <li><a href="http://piazza.com">Piazza</a></li>
+      <li><a href="#">Zoom</a></li>
+      <li class="wd-active">
+        <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
+      </li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+      <li><a href="#">People</a></li>
+    </ul>
+  </div>
+
+  <div class="flex-fill p-4">
+
+    <input class="float-start w-25" placeholder="Search for Assignments" >
+
+
+    <div class="float-end">
+      <div class="input-group ">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Edit Assignments Due Date</a>
+            <a class="dropdown-item" href="#">Assignment Group Weights</a>
+            <a class="dropdown-item" href="#">Gradescope 1.3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="wd-add-item-button float-end"><i class="fa-solid fa-plus"></i> Assignment</button>
+    <button class="float-end"><i class="fa-solid fa-plus"></i> Group</button>
+
+
+
+    <br /> <br />
+    <hr />
+    <ul class="list-group wd-modules">
+      <li class="list-group-item">
+        <div>
+          <i class="fa-solid fa-grip fa-rotate-90"></i>
+          <span class="half-tab"></span>
+          <i class="fa-solid fa-caret-down"></i>
+          <span class="half-tab"></span>
+          Assignments
+          <span class="float-end">
+                        <span class="border border-dark rounded-pill" style="padding: 2px;">40% of Total</span>
+            <i class="fa fa-plus ms-2"></i>
+
+            <button class="btn btn-outline-secondary dropdown-toggle ms-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical" style="color: black"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Edit</a>
+                <a class="dropdown-item" href="#">Speed Grader</a>
+                <a class="dropdown-item" href="#">Duplicate</a>
+                <a class="dropdown-item" href="#">Delete</a>
+                <a class="dropdown-item" href="#">Move To</a>
+                <a class="dropdown-item" href="#">Send To</a>
+                <a class="dropdown-item" href="#">Copy To</a>
+                <a class="dropdown-item" href="#">Share To Commons</a>
+            </div>
+          </span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A1 SETUP <br />WEEK 0<br />SEPT 18, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A2 HTML<br />WEEK 0<br />SEPT 25, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A3 CSS <br />WEEK 1<br />OCT 2, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A4 BOOTSTRAP<br />WEEK 3<br />OCT 9, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A5 JAVASCRIPT <br />WEEK 4<br />OCT 16, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                A6 REACT <br />WEEK 5<br />OCT 23, 2022
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+
+        </ul>
+
+      </li>
+
+    </ul>
+    <ul class="list-group wd-modules">
+      <li class="list-group-item">
+        <div>
+          <i class="fa-solid fa-grip fa-rotate-90"></i>
+          <span class="half-tab"></span>
+          <i class="fa-solid fa-caret-down"></i>
+          <span class="half-tab"></span>
+          Quizzes
+          <span class="float-end">
+                        <span class="border border-dark rounded-pill" style="padding: 2px;">10% of Total</span>
+            <i class="fa fa-plus ms-2"></i>
+                        <button class="btn btn-outline-secondary dropdown-toggle ms-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical" style="color: black"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Edit</a>
+                <a class="dropdown-item" href="#">Speed Grader</a>
+                <a class="dropdown-item" href="#">Duplicate</a>
+                <a class="dropdown-item" href="#">Delete</a>
+                <a class="dropdown-item" href="#">Move To</a>
+                <a class="dropdown-item" href="#">Send To</a>
+                <a class="dropdown-item" href="#">Copy To</a>
+                <a class="dropdown-item" href="#">Share To Commons</a>
+            </div>
+          </span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                Q1 HTML <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                Q2 CSS <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                Q3 JAVASCRIPT <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                Q4 NODE <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                Q5 MONGO <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+
+
+        </ul>
+
+      </li>
+
+    </ul>
+    <ul class="list-group wd-modules">
+      <li class="list-group-item">
+        <div>
+          <i class="fa-solid fa-grip fa-rotate-90"></i>
+          <span class="half-tab"></span>
+          <i class="fa-solid fa-caret-down"></i>
+          <span class="half-tab"></span>
+          EXAMS
+          <span class="float-end">
+                        <span class="border border-dark rounded-pill" style="padding: 2px;">20% of Total</span>
+            <i class="fa fa-plus ms-2"></i>
+                        <button class="btn btn-outline-secondary dropdown-toggle ms-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical" style="color: black"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Edit</a>
+                <a class="dropdown-item" href="#">Speed Grader</a>
+                <a class="dropdown-item" href="#">Duplicate</a>
+                <a class="dropdown-item" href="#">Delete</a>
+                <a class="dropdown-item" href="#">Move To</a>
+                <a class="dropdown-item" href="#">Send To</a>
+                <a class="dropdown-item" href="#">Copy To</a>
+                <a class="dropdown-item" href="#">Share To Commons</a>
+            </div>
+          </span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                MIDTERM-1 <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                MIDTERM-2 <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+
+
+
+
+
+
+        </ul>
+
+      </li>
+
+    </ul>
+    <ul class="list-group wd-modules">
+      <li class="list-group-item">
+        <div>
+          <i class="fa-solid fa-grip fa-rotate-90"></i>
+          <span class="half-tab"></span>
+          <i class="fa-solid fa-caret-down"></i>
+          <span class="half-tab"></span>
+          PROJECTS
+          <span class="float-end">
+                        <span class="border border-dark rounded-pill" style="padding: 2px;">30% of Total</span>
+            <i class="fa fa-plus ms-2"></i>
+                        <button class="btn btn-outline-secondary dropdown-toggle ms-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical" style="color: black"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Edit</a>
+                <a class="dropdown-item" href="#">Speed Grader</a>
+                <a class="dropdown-item" href="#">Duplicate</a>
+                <a class="dropdown-item" href="#">Delete</a>
+                <a class="dropdown-item" href="#">Move To</a>
+                <a class="dropdown-item" href="#">Send To</a>
+                <a class="dropdown-item" href="#">Copy To</a>
+                <a class="dropdown-item" href="#">Share To Commons</a>
+            </div>
+          </span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto text-center">
+                <i class="fa-solid fa-grip fa-rotate-90"></i>
+                <i class="fa-solid fa-pen-to-square ms-2" style="color: green"></i>
+              </div>
+
+              <div class="col ms-3">
+                PROJECT <br />NOT AVAILABLE YET
+              </div>
+              <div class="col-auto text-end">
+                <i class="fa fa-check-circle text-success"></i>
+
+                <i class="fa fa-ellipsis-v ms-3 ellipsis-icon"></i>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+
+
+
 </body>
 </html>

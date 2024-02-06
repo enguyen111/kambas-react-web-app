@@ -34,7 +34,10 @@ body {
     margin-left: 105px;
 }
 
-
+.wd-add-item-button {
+    background-color: red;
+    color: white;
+}
 
 
 .wd-appearing-header {
