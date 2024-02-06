@@ -129,7 +129,7 @@
   <div class="p-4 flex-md-fill d-flex-header">
     <i class="fa-solid fa-bars fa-2x" style="color: red"></i>
     <span class="tab" />
-    <nav style="--bs-breadcrumb-divider: '>;" aria-label="breadcrumb">
+    <nav style="--bs-breadcrumb-divider: '>"; aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item" ><a href="/Kanbas/Courses/Home/screen.html">CS1234.FA20.01 React JS</a></li>
         <li class="breadcrumb-item active" id="active-breadcrumb" aria-current="page">Modules</li>
@@ -164,18 +164,18 @@
   <div class="flex-fill p-4">
 
 
-    <button class="wd-button-float-right2" style="padding: 5px">
-      <i class="fa fa-ellipsis-v ms-2"></i>
-    </button>
-    <button class="wd-button-float-right2 wd-module-button">+ Module</button>
-
-    <select class="wd-button-float-right2" style="padding: 4px;">
-      <option>Publish All</option>
-      <option>Unpublish All</option>
-    </select>
-    <button class="wd-button-float-right2">View Progress</button>
-
-    <button class="wd-button-float-right2">Collapse All</button>
+    <div class="float-end">
+      <button>Collapse All</button>
+      <button >View Progress</button>
+      <select style="padding: 4px;">
+        <option>Publish All</option>
+        <option>Unpublish All</option>
+      </select>
+      <button class=" wd-module-button"><i class="fa-solid fa-plus"></i> Module</button>
+      <button  style="padding: 5px">
+        <i class="fa fa-ellipsis-v ms-2"></i>
+      </button>
+    </div>
 
     <br/> <br/> <br/>
     <ul class="list-group wd-modules">
@@ -257,11 +257,13 @@
     <hr />
     <h6>TBA</h6>
     <br />
-    <h6 class="wd-coming-up">Coming Up</h6>
-    <div class="wd-calendar-float">
+    <h6 class="float-start">Coming Up</h6>
+    <div class="container-fluid">
+    <div class="float-end">
       <i class="fa-regular fa-calendar "></i> <span class="half-tab"/>View Calendar
     </div>
     <br />
+    </div>
     <hr />
     <div>
       <i class="fa-regular fa-calendar "></i> <span class="half-tab"/>CS1234 Lecture 1

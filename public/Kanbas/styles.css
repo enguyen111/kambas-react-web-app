@@ -34,14 +34,8 @@ body {
     margin-left: 105px;
 }
 
-.wd-button-float-right {
-    float: right;
-    margin-right: -0.5px;
-}
-.wd-button-float-right2 {
-    float: right;
-    margin: 2px;
-}
+
+
 
 .wd-appearing-header {
     background-color: black;
