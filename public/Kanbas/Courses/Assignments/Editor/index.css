@@ -1,0 +1,12 @@
+.wd-published {
+    color: green;
+}
+
+#card-body {
+    padding: 20px;
+}
+
+.btn-success.override-bs {
+    background-color: red;
+    border-color: red;
+}
