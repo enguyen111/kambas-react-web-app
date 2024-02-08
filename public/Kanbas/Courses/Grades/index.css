@@ -1,0 +1,40 @@
+#export-button {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.grade-buttons {
+    padding: 8px;
+}
+.grade-buttons-attributes {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 0 0.05rem rgba(95, 97, 99, 0.5);
+}
+
+.btn-outline-secondary.override-bs {
+    background-color: #f0f0f0;
+    box-shadow: 0.08rem 0.09rem 0 0.04rem rgba(75, 77, 79, 0.5);
+
+
+    border: none;
+}
+
+.btn-attribute-color {
+    color: black;
+}
+
+
+p.bold {
+    font-weight: bold;
+}
+
+.filter-button {
+    padding: 6px 10px;
+
+}
+
+
+.student-header-decorator {
+    text-decoration: none;
+    color: red;
+}
