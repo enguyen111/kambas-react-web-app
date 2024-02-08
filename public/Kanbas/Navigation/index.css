@@ -4,6 +4,7 @@
     padding: 0px;  margin: 0px;
     width: 85px;
     position: fixed;
+    height: 100%;
 }
 .wd-kanbas-navigation li {
     padding: 7px;     margin-bottom: 10px;
