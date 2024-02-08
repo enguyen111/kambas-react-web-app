@@ -3,6 +3,13 @@
     <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="/Kanbas/styles.css"/>
     <link rel="stylesheet" href="/Kanbas/Navigation/index.css"/>
+    <link rel="stylesheet" href="/Kanbas/styles.css"/>
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css"/>
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css">
+    <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/cc0e223270.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -41,6 +48,51 @@
         <i class="fa-regular fa-circle-question"></i> <br/>Help</a>
     </li>
 </ul>
+
+<div class="d-flex wd-appearing-header align-items-center text-center d-md-none">
+    <div class="col-4">
+        <a data-toggle="collapse" data-target="#mini-main-nav">
+            <i class="fa-solid fa-bars fa-2x" style="color: white"></i>
+        </a>
+    </div>
+    <div class="col-4">
+        <h4 class="header-course-color align-items-center text-center">
+            <span class="wd-appearing-text"/> Dashboard</h4>
+    </div>
+</div>
+<div id="mini-main-nav" class="collapse d-md-none">
+    <ul class="wd-navigation">
+
+        <li><a href="/Kanbas/Account/Profile/screen.html">
+            <i class="fa-solid fa-user"></i> <span class="tab"></span>Account</a>
+        </li>
+        <li>
+            <a href="/Kanbas/Dashboard/screen.html">
+                <i class="fa fa-tachometer"></i><span class="tab"></span>Dashboard</a>
+        </li>
+        <li><a href="/Kanbas/Courses/Home/screen.html">
+            <i class="fa-solid fa-book"></i><span class="tab"></span>Courses</a>
+        </li>
+        <li><a href="#"><i class="fa fa-calendar"></i><span class="tab"></span>Calendar</a></li>
+        <li><a href="#">
+            <i class="fa-solid fa-envelope-open-text"></i> <span class="tab"></span>Inbox</a>
+        </li>
+        <li><a href="#">
+            <i class="fa-regular fa-clock"></i><span class="tab"></span>History</a>
+        </li>
+        <li><a href="#">
+            <i class="fa-solid fa-desktop"></i><span class="tab"></span>Studio</a>
+        </li>
+        <li><a href="#">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="tab"></span>Commons
+        </a></li>
+        <li><a href="#">
+            <i class="fa-regular fa-circle-question"></i> <span class="tab"></span>Help</a>
+        </li>
+    </ul>
+</div>
+
+
 
 
 <div class="d-flex">
