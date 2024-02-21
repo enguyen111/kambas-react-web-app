@@ -2,9 +2,11 @@ import A3 from './a3/index'
 import A4 from './a4/index'
 import {Link, Route, Routes} from "react-router-dom";
 import React from "react";
+import Nav from "../Nav";
 function Labs() {
     return (
         <div className="container-fluid">
+            <Nav/>
             <h1>Labs</h1>
             <Link to="a3" > Assignment 3</Link> | {" "}
             <Link to="a4" > Assignment 4</Link> | {" "}
