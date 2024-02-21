@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome To JavaScript</h1>
+<script>
+  //alert("Hello World!");
+  document.write("<h2>Hello World!</h2>");
+
+  const todos = [
+    {id: 1, text: "Learn JS", completed: false},
+    {id: 2, text: "Find a Job", completed: false},
+    {id: 3, text: "Learn WebDev", completed: true},
+  ]
+
+  document.write("<h3>My TODOs </h3>");
+  document.write("<ul>");
+  todos.forEach((todo) => {
+    document.write(`<li>${todo.text}</li>`);
+  });
+  document.write("</ul>");
+</script>
+</body>
+</html>
