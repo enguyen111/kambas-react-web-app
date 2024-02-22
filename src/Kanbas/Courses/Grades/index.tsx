@@ -85,12 +85,7 @@ function Grades() {
                                     <span className="dropdown-toggle"></span>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-right form-control">
-                                    <Link className="dropdown-item" to="#">A1</Link>
-                                    <Link className="dropdown-item" to="#">A2</Link>
-                                    <Link className="dropdown-item" to="#">A3</Link>
-                                    <Link className="dropdown-item" to="#">A4</Link>
-                                    <Link className="dropdown-item" to="#">A5</Link>
-                                    <Link className="dropdown-item" to="#">Q1</Link>
+                                    {as.map((assignment) => (<Link className="dropdown-item" to="#">{assignment.title} </Link>))}
                                 </div>
                             </div>
                     </div>
