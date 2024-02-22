@@ -98,5 +98,66 @@
     "email": "gvale@mirkwood.com",
     "dob": "2879-07-20",
     "role": "FACULTY"
+  },
+  {
+    "_id": "131",
+    "username": "hahaman",
+    "password": "jecht",
+    "firstName": "Tidus",
+    "lastName": "X",
+    "email": "litiko@x.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
+  },
+  {
+    "_id": "132",
+    "username": "xsummoner",
+    "password": "yuna1",
+    "firstName": "Yuna",
+    "lastName": "Songstress",
+    "email": "yuna@x.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
+  },
+  {
+    "_id": "133",
+    "username": "nkreiss",
+    "password": "ff132noel",
+    "firstName": "Noel",
+    "lastName": "Kreiss",
+    "email": "kreiss@xiii.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
+  },
+  {
+    "_id": "134",
+    "username": "knighte",
+    "password": "ff13light",
+    "firstName": "Lightning",
+    "lastName": "Farron",
+    "email": "knighte@xiii.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
+  },
+  {
+    "_id": "135",
+    "username": "oraclee",
+    "password": "ff13serah",
+    "firstName": "Serah",
+    "lastName": "Farron",
+    "email": "oracle@xiii.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
+  },
+  {
+    "_id": "136",
+    "username": "13snow",
+    "password": "ff13snow",
+    "firstName": "Snow",
+    "lastName": "Villiers",
+    "email": "snow@xiii.com",
+    "dob": "2879-07-20",
+    "role": "FACULTY"
   }
+
 ]
