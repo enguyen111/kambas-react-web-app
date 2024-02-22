@@ -15,6 +15,7 @@ function Kanbas() {
                     <Route path="Account" element={<h2 className="d-flex">Account</h2>}></Route>
                     <Route path="Dashboard" element={<Dashboard/>}></Route>
                     <Route path="Courses/:courseId/*" element={<Courses/>}></Route>
+                    <Route path="Calendar"element={<h2>Calendar</h2>}></Route>
                     <Route path="Inbox"element={<h2>Inbox</h2>}></Route>
                     <Route path="History" element={<h2>History</h2>}></Route>
                     <Route path="Studio" element={<h2>Studio</h2>}></Route>

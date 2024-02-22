@@ -56,7 +56,7 @@ function Assignments() {
                 </button>
                 <button className="float-end"><FaPlus/>Group</button>
             </>
-            <br/>
+            <br/><br/>
             <br/>
             <ul className="list-group wd-modules">
                 <li className="list-group-item">

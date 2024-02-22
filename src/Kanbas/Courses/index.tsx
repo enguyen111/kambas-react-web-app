@@ -9,6 +9,16 @@ import Home from "./Home";
 import Assignments from "./Assigments";
 import AssignmentEditor from "./Assigments/Editor";
 import Grades from "./Grades";
+import {
+    FaBook, FaBookOpen,
+    FaCalendar, FaCheck,
+    FaChevronDown,
+    FaClock, FaDesktop,
+    FaEnvelopeOpen, FaHome, FaPlug, FaQuestionCircle,
+    FaRegUserCircle, FaRocket,
+    FaTachometerAlt
+} from "react-icons/fa";
+import {FaArrowRightFromBracket, FaCircleNodes, FaPerson} from "react-icons/fa6";
 
 function Courses() {
     const {courseId} = useParams();
@@ -27,6 +37,84 @@ function Courses() {
     const matchedLocation = course_nav_locs.find(navLoc => pathname.includes(navLoc.location));
     return (
         <div>
+            <div className="d-flex wd-appearing-header align-items-center text-center d-md-none">
+                <div className="col-4">
+                    <a data-toggle="collapse" data-target="#mini-main-nav">
+                        <HiMiniBars3 className="fs-1" style={{color: "white"}}/>
+                    </a>
+                </div>
+                <div className="col-4">
+                    <h5 className="header-course-color align-items-center text-center wd-appearing-text">
+                         {course?._id}.SP23.01 {course?.name} {matchedLocation ? matchedLocation.location : ""}</h5>
+                </div>
+                <div className="col-4 wd-appearing-text align-items-center text-center">
+                    <a data-toggle="collapse" data-target="#mini-course-nav">
+                        <FaChevronDown className="fs-3" style={{color: "white"}}/>
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="mini-main-nav" className="collapse d-md-none">
+                <ul className="wd-navigation">
+
+                    <li><Link to="../Account">
+                        <FaRegUserCircle className="fs-5"/> <span className="tab"></span>Account</Link>
+                    </li>
+                    <li>
+                        <Link to="../Dashboard">
+                            <FaTachometerAlt className="fs-5"/><span className="tab"></span>Dashboard</Link>
+                    </li>
+                    <li><Link to="Home">
+                        <FaBook className="fs-5"/><span className="tab"></span>Courses</Link>
+                    </li>
+                    <li><Link to="../Calendar"><FaCalendar className="fs-5"/><span className="tab"></span>Calendar</Link></li>
+                    <li><Link to="../Inbox">
+                        <FaEnvelopeOpen className="fs-5"/> <span className="tab"></span>Inbox</Link>
+                    </li>
+                    <li><Link to="../History">
+                        <FaClock className="fs-5"/><span className="tab"></span>History</Link>
+                    </li>
+                    <li><Link to="../Studio">
+                        <FaDesktop className="fs-5"/><span className="tab"></span>Studio</Link>
+                    </li>
+                    <li><Link to="../Commons">
+                        <FaArrowRightFromBracket className="fs-5"/><span className="tab"></span>Commons
+                    </Link></li>
+                    <li><Link to="../Help">
+                        <FaQuestionCircle className="fs-5"/> <span className="tab"></span>Help</Link>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="mini-course-nav" className="collapse d-md-none">
+                <ul className="wd-navigation" style={{width: "130px"}}>
+                    <li>
+                        <Link to="Home">
+                            <FaHome className="fs-5"/><span className="tab"></span>Home
+                        </Link></li>
+                    <li>
+                        <Link to="Modules">
+                            <FaCircleNodes className="fs-5"/><span className="tab"></span>Modules</Link>
+                    </li>
+                    <li><Link to="#">
+                        <FaPlug className="fs-5"/> <span className="tab"></span>Piazza</Link></li>
+                    <li><Link to="#">
+                        <FaPlug className="fs-5"/> <span className="tab"></span>Zoom</Link></li>
+                    <li>
+                        <Link to="Assignments">
+                            <FaBookOpen className="fs-5"/> {" "}Assignments</Link>
+                    </li>
+                    <li><Link to="#">
+                        <FaRocket className="fs-5"/><span className="tab"></span>Quizzes</Link></li>
+                    <li><Link to="Grades">
+                        <FaCheck className="fs-5"/><span className="tab"></span>Grades</Link></li>
+                    <li><Link to="#">
+                        <FaPerson className="fs-5"/><span className="tab"></span>People</Link></li>
+                </ul>
+            </div>
+
+
             <div className="d-flex container-fluid">
                 <div className="flex-fill">
                     <div>
