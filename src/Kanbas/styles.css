@@ -69,3 +69,8 @@ body {
 .wd-color-black {
     color: black;
 }
+
+.breadcrumb-div {
+    --bs-breadcrumb-divider: '>';
+}
+

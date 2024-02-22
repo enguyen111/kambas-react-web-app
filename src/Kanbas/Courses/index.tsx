@@ -1,20 +1,49 @@
 import React from "react"
-import {Navigate, Route, Routes, useParams} from "react-router-dom";
+import {Link, Navigate, Route, Routes, useLocation, useParams} from "react-router-dom";
 import courses from "../Database/courses.json"
 import {HiMiniBars3} from "react-icons/hi2";
 import CourseNavigation from "./Navigation";
 import "../styles.css"
+import Modules from "./Modules";
 
 function Courses() {
     const {courseId} = useParams();
+    const { pathname } = useLocation();
     const course = courses.find((course) => course._id === courseId);
+    const course_nav_locs = [
+        { location: "Home"},
+        { location: "Modules"},
+        { location: "Piazza"},
+        { location: "Assignments"},
+        { location: "Quizzes"},
+        { location: "Grades"},
+        { location: "People"},
+    ];
 
+    const matchedLocation = course_nav_locs.find(navLoc => pathname.includes(navLoc.location));
     return (
         <div>
             <div className="d-flex container-fluid">
                 <div className="flex-fill">
                     <div>
-                        <h2><HiMiniBars3/> Course {course?.name}</h2>
+                        <div className="d-none d-md-block">
+                            <div className="p-4 flex-md-fill d-flex-header">
+                                <HiMiniBars3 className="fs-2" style={{color: "red", } }/>
+                                <span className="tab" />
+                                <nav className="breadcrumb-div" aria-label="breadcrumb" style={{marginTop: "2px"}}>
+                                    <ol className="breadcrumb">
+                                        <li className="breadcrumb-item bread">
+                                            <Link to="Home">{course?._id}.SP23.01 {course?.name}</Link>
+                                        </li>
+                                        <li className="breadcrumb-item active" id="active-breadcrumb" aria-current="page">
+                                            {matchedLocation ? matchedLocation.location : ""}
+                                        </li>
+
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
                         <hr/>
                     </div>
                 </div>
@@ -22,12 +51,12 @@ function Courses() {
 
             <div className="d-flex">
                 <CourseNavigation/>
-                <div>
-                    <div>
+
+                    <div className="flex-fill container-fluid">
                         <Routes>
                             <Route path="/" element={<Navigate to="Home"/>}/>
                             <Route path="Home" element={<h1>Home</h1>}/>
-                            <Route path="Modules" element={<h1>Modules</h1>}/>
+                            <Route path="Modules" element={<Modules/>}/>
                             <Route path="Piazza" element={<h1>Piazza</h1>}/>
                             <Route path="Assignments" element={<h1>Assignments</h1>}/>
                             <Route path="Assignments/:assignmentId" element={<h1>Assignment Editor</h1>}/>
@@ -37,7 +66,7 @@ function Courses() {
                         </Routes>
                     </div>
 
-                </div>
+
 
 
             </div>
