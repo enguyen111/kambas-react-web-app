@@ -60,10 +60,11 @@ function Grades() {
                                     <span className="dropdown-toggle"></span>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-right form-control">
-                                    <Link className="dropdown-item" to="#">John Doe</Link>
-                                    <Link className="dropdown-item" to="#">Jane Doe</Link>
-                                    <Link className="dropdown-item" to="#">Alice Brown</Link>
-                                    <Link className="dropdown-item" to="#">Charlie Brown</Link>
+                                    {es.map((enrollment) => {
+                                        const user = users.find((user) => user._id === enrollment.user);
+                                        return <Link className="dropdown-item" to="#">{user?.firstName} {user?.lastName} </Link>
+                                    })}
+
                                 </div>
                             </div>
                     </div>
