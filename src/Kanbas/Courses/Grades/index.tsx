@@ -2,7 +2,7 @@ import { assignments, enrollments, grades, users } from "../../Database";
 import {Link, useParams} from "react-router-dom";
 import "./index.css"
 import {FaGear, FaMagnifyingGlass} from "react-icons/fa6";
-import {FaFileExport, FaFileImport} from "react-icons/fa";
+import {FaFileExport, FaFileImport, FaFilter} from "react-icons/fa";
 function Grades() {
     const { courseId } = useParams();
     const as = assignments.filter((assignment) => assignment.course === courseId);
@@ -70,6 +70,8 @@ function Grades() {
                     </div>
                 </div>
 
+
+
                 <div className="col-md-6">
                     <p className="bold">Assignment Names</p>
 
@@ -92,6 +94,14 @@ function Grades() {
                     </div>
                 </div>
 
+            </div>
+            <br/>
+
+            <div className="float-start">
+                <button className="rounded filter-button">
+                    <FaFilter/>
+                    <span className="half-tab">Apply Filters</span>
+                </button>
             </div>
             <br/>
             <br/>
