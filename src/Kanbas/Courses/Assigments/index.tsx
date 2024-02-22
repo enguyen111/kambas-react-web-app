@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {FaCheckCircle, FaEllipsisV, FaPenSquare, FaPlus, FaPlusCircle} from "react-icons/fa";
 import {Link, useParams} from "react-router-dom";
 import {assignments} from "../../Database";
+import {FaMagnifyingGlass} from "react-icons/fa6";
 
 function Assignments() {
     const {courseId} = useParams();
@@ -20,7 +21,22 @@ function Assignments() {
     return (
         <>
             <>
-                <input className="float-start w-25" placeholder="Search for Assignments"/>
+                <div className="input-group float-start w-25">
+                    <span className="input-group-text"><FaMagnifyingGlass/></span>
+                    <input type="text" className="form-control"
+                           placeholder="Search for Assignments" aria-label="Search"
+                           aria-describedby="search-assignments"/>
+
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" id="search-assignments">
+                            <span className="dropdown-toggle"></span>
+                        </button>
+                        <div className="dropdown-menu dropdown-menu-right form-control">
+                            {assignmentList.map((assignment) => (<Link className="dropdown-item" to="#">{assignment.title} </Link>))}
+                        </div>
+                    </div>
+                </div>
 
                 <div className="float-end">
                     <div className="input-group ">
