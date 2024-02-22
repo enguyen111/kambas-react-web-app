@@ -1,0 +1,71 @@
+body {
+    font-family: helvetica;
+}
+.d-flex {
+    display: flex;
+    margin-left: 84px;
+}
+
+.d-flex-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 1em;
+}
+.half-tab {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+.header-course-color {
+    color: red;
+}
+
+.header-course-section {
+    display: inline-block;
+    margin-left: 0.5em;
+    color: dimgray;
+}
+
+.hr-container {
+    margin-left: 105px;
+}
+
+.wd-add-item-button {
+    background-color: red;
+    color: white;
+}
+
+
+.wd-appearing-header {
+    background-color: black;
+    margin-left: 0;
+}
+
+.wd-appearing-text {
+    color: white;
+}
+
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: red;
+    font-size: 18px;
+}
+
+#active-breadcrumb {
+    color: gray;
+    font-size: 18px;
+}
+
+.wd-cancel-button {
+    background-color: white;
+    border-color: darkgray;
+}
+
+.wd-color-black {
+    color: black;
+}
