@@ -3,8 +3,11 @@ import A4 from './a4/index'
 import {Link, Route, Routes} from "react-router-dom";
 import React from "react";
 import Nav from "../Nav";
+import {Provider} from "react-redux";
+import store from "./store";
 function Labs() {
     return (
+        <Provider store={store}>
         <div className="container-fluid">
             <Nav/>
             <h1>Labs</h1>
@@ -15,6 +18,7 @@ function Labs() {
                 <Route path="a4" element={<A4 />} />
             </Routes>
         </div>
+        </Provider>
     );
 }
 export default Labs;
