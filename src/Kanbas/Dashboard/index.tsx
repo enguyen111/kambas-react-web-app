@@ -1,19 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import "../index.css"
-import courses from "../Database/courses.json"
 import {Link} from "react-router-dom";
+import courseData from "../Database/courses.json"
 import {HiMiniBars3} from "react-icons/hi2";
 import {
     FaBook,
     FaCalendar,
-    FaChevronDown,
     FaClock, FaDesktop,
     FaEnvelopeOpen, FaQuestionCircle,
     FaRegUserCircle,
     FaTachometerAlt
 } from "react-icons/fa";
 import {FaArrowRightFromBracket} from "react-icons/fa6";
-function Dashboard(){
+
+function Dashboard() {
+    const [formDisplay, setAddFormDisplay] = useState(false);
+    const [addButtonDisplay, setAddButtonDisplay] = useState(true);
+    const [courses, setCourses] = useState(courseData);
+    const [course, setCourse] = useState({
+        _id: "0", name: "New Course", number: "New Number",
+        startDate: "2023-09-10", endDate: "2023-12-15",
+        image: "reactjs.jpg"
+    });
+    const addNewCourse = () => {
+        const newCourse = {
+            ...course,
+            _id: new Date().getTime().toString()
+        };
+        setCourses([...courses, {...course, ...newCourse}]);
+        setAddButtonDisplay(!addButtonDisplay);
+        setAddFormDisplay(!formDisplay);
+        alert("New Course Successfully Added!");
+    };
+
+
     return (
         <div>
             <div className="d-flex wd-appearing-header align-items-center text-center d-md-none">
@@ -41,7 +61,8 @@ function Dashboard(){
                     <li><Link to="Home">
                         <FaBook className="fs-5"/><span className="tab"></span>Courses</Link>
                     </li>
-                    <li><Link to="../Calendar"><FaCalendar className="fs-5"/><span className="tab"></span>Calendar</Link></li>
+                    <li><Link to="../Calendar"><FaCalendar className="fs-5"/><span
+                        className="tab"></span>Calendar</Link></li>
                     <li><Link to="../Inbox">
                         <FaEnvelopeOpen className="fs-5"/> <span className="tab"></span>Inbox</Link>
                     </li>
@@ -59,48 +80,86 @@ function Dashboard(){
                     </li>
                 </ul>
             </div>
-        <div className="d-flex">
+            <div className="d-flex">
 
-            <div className="flex-fill">
-                <div className="p-4">
+                <div className="flex-fill">
+                    <div className="p-4">
 
 
+                        <h1>Dashboard</h1>
 
-                    <h1>Dashboard</h1>
-                    <hr/>
-                    <h2>Published Courses ({courses.length})</h2>
-                    <hr/>
-                    <div className="row">
-                        <div className="row row-cols-1 row-cols-md-5 g-4">
-                            {courses.map((course) => (
-                                <div key={course._id} className="col" style={{ width: 300 }}>
-                                    <div className="card">
-                                        <img src={`/images/${course.image}`} className="card-img-top"
-                                             style={{ height: 150 }}/>
-                                        <div className="card-body">
-                                            <Link className="card-title" to={`/Kanbas/Courses/${course._id}/Home`}
-                                                  style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
-                                                {course._id}{" "}{course.name} </Link>
-                                            <p className="card-text">{course.name}</p>
-                                            <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
-                                                Go </Link>
+                        {formDisplay &&
+                            <div className="form" id="courseAdder">
+                                <div className="input_title">
+                                    New Course Editor:
+                                </div>
+                                <input value={course.name} className="form-control" placeholder="Please enter the course name"
+                                       onChange={(e) => setCourse({...course, name: e.target.value})}/>
+                                <br/>
+                                <input value={course.number} className="form-control" placeholder="Please enter the course number"
+                                       onChange={(e) => setCourse({...course, number: e.target.value})}/>
+                                <br/>
+                                <input value={course.startDate} className="form-control" type="date" placeholder="Please enter the start date"
+                                       onChange={(e) => setCourse({...course, startDate: e.target.value})}/>
+                                <br/>
+                                <input value={course.endDate} className="form-control" type="date" placeholder="Please enter the end date"
+                                       onChange={(e) => setCourse({...course, endDate: e.target.value})}/>
+                                <br/>
+                                <button className="form_postBtn" onClick={addNewCourse}>
+                                    Add
+                                </button>
+                            </div>
+                        }
+
+                        {addButtonDisplay &&
+                            <button className="float-end" onClick={() => {
+                                setAddFormDisplay(!formDisplay);
+                                setAddButtonDisplay(!addButtonDisplay);
+                            }}>
+                                Add new course
+                            </button>
+                        }
+                        <br/>
+
+                        <hr/>
+                        <h2>Published Courses ({courses.length})</h2>
+                        <hr/>
+                        <div className="row">
+                            <div className="row row-cols-1 row-cols-md-5 g-4">
+                                {courses.map((course) => (
+                                    <div key={course._id} className="col" style={{width: 300}}>
+                                        <div className="card">
+                                            <img src={`/images/${course.image}`} className="card-img-top"
+                                                 style={{height: 150}}/>
+                                            <div className="card-body">
+                                                <Link className="card-title" to={`/Kanbas/Courses/${course._id}/Home`}
+                                                      style={{
+                                                          textDecoration: "none",
+                                                          color: "navy",
+                                                          fontWeight: "bold"
+                                                      }}>
+                                                    {course._id}{" "}{course.name} </Link>
+                                                <p className="card-text">{course.name}</p>
+                                                <Link to={`/Kanbas/Courses/${course._id}/Home`}
+                                                      className="btn btn-primary">
+                                                    Go </Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
+                <div className="p-4 d-none d-md-block" style={{width: "26%"}}>
+                    <h6>To Do</h6>
+                    <hr/>
+                </div>
 
             </div>
-            <div className="p-4 d-none d-md-block" style={{width: "26%"}}>
-                <h6>To Do</h6>
-                <hr/>
-            </div>
-
         </div>
-            </div>
     );
 
 }
