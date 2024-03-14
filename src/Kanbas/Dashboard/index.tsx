@@ -33,6 +33,11 @@ function Dashboard() {
         alert("New Course Successfully Added!");
     };
 
+    const deleteCourse = (courseId: string) => {
+        setCourses(courses.filter((course) => course._id !== courseId));
+    };
+
+
 
     return (
         <div>
@@ -138,11 +143,20 @@ function Dashboard() {
                                                           color: "navy",
                                                           fontWeight: "bold"
                                                       }}>
-                                                    {course._id}{" "}{course.name} </Link>
+                                                    {course._id}{" "}{course.name}
+
+                                                </Link>
                                                 <p className="card-text">{course.name}</p>
                                                 <Link to={`/Kanbas/Courses/${course._id}/Home`}
                                                       className="btn btn-primary">
                                                     Go </Link>
+                                                {" "}
+                                                <button className="btn btn-danger" onClick={(event) => {
+                                                    event.preventDefault();
+                                                    deleteCourse(course._id);
+                                                }}>
+                                                    Delete
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
