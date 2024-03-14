@@ -125,7 +125,7 @@ function Courses() {
                                 <nav className="breadcrumb-div" aria-label="breadcrumb" style={{marginTop: "2px"}}>
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item bread">
-                                            <Link to="Home">{course?._id}.SP23.01 {course?.name}</Link>
+                                            <Link to="Home">{course?.number}.SP23.01 {course?.name}</Link>
                                         </li>
                                         <li className="breadcrumb-item active" id="active-breadcrumb" aria-current="page">
                                             {matchedLocation ? matchedLocation.location : ""}

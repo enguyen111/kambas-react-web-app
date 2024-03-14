@@ -35,7 +35,28 @@ function Dashboard() {
 
     const deleteCourse = (courseId: string) => {
         setCourses(courses.filter((course) => course._id !== courseId));
+        alert("Course was successfully deleted!")
     };
+
+    const updateCourse = () => {
+        setCourses(
+            courses.map((c) => {
+                if (c._id === course._id) {
+                    toggleForm();
+                    alert("Course was successfully updated!")
+                    return course;
+                } else {
+                    return c;
+                }
+            })
+        );
+    };
+
+
+    const toggleForm = () => {
+        setAddButtonDisplay(!addButtonDisplay);
+        setAddFormDisplay(!formDisplay);
+    }
 
 
 
@@ -96,7 +117,7 @@ function Dashboard() {
                         {formDisplay &&
                             <div className="form" id="courseAdder">
                                 <div className="input_title">
-                                    New Course Editor:
+                                    Course Editor:
                                 </div>
                                 <input value={course.name} className="form-control" placeholder="Please enter the course name"
                                        onChange={(e) => setCourse({...course, name: e.target.value})}/>
@@ -110,9 +131,14 @@ function Dashboard() {
                                 <input value={course.endDate} className="form-control" type="date" placeholder="Please enter the end date"
                                        onChange={(e) => setCourse({...course, endDate: e.target.value})}/>
                                 <br/>
-                                <button className="form_postBtn" onClick={addNewCourse}>
+                                <button className="btn btn-primary" onClick={addNewCourse}>
                                     Add
                                 </button>
+                                {" "}
+                                <button className="btn btn-success" onClick={updateCourse} >
+                                    Update
+                                </button>
+
                             </div>
                         }
 
@@ -143,7 +169,7 @@ function Dashboard() {
                                                           color: "navy",
                                                           fontWeight: "bold"
                                                       }}>
-                                                    {course._id}{" "}{course.name}
+                                                    {course.number}{" "}{course.name}
 
                                                 </Link>
                                                 <p className="card-text">{course.name}</p>
@@ -157,6 +183,17 @@ function Dashboard() {
                                                 }}>
                                                     Delete
                                                 </button>
+                                                {" "}
+                                                <button className="btn btn-success" onClick={(event) => {
+                                                    event.preventDefault();
+                                                    setCourse(course);
+                                                    if (!formDisplay) {
+                                                        toggleForm();
+                                                    }
+                                                }}>
+                                                    Edit
+                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
