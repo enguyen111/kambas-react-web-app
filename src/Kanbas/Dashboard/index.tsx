@@ -13,51 +13,28 @@ import {
 } from "react-icons/fa";
 import {FaArrowRightFromBracket} from "react-icons/fa6";
 
-function Dashboard() {
+function Dashboard({ courses, course, setCourse, addNewCourse,
+                       deleteCourse, updateCourse }: {
+    courses: any[]; course: any; setCourse: (course: any) => void;
+    addNewCourse: () => void; deleteCourse: (course: any) => void;
+    updateCourse: () => void; }) {
     const [formDisplay, setAddFormDisplay] = useState(false);
     const [addButtonDisplay, setAddButtonDisplay] = useState(true);
-    const [courses, setCourses] = useState(courseData);
-    const [course, setCourse] = useState({
-        _id: "0", name: "New Course", number: "New Number",
-        startDate: "2023-09-10", endDate: "2023-12-15",
-        image: "reactjs.jpg"
-    });
-    const addNewCourse = () => {
-        const newCourse = {
-            ...course,
-            _id: new Date().getTime().toString()
-        };
-        setCourses([...courses, {...course, ...newCourse}]);
-        setAddButtonDisplay(!addButtonDisplay);
-        setAddFormDisplay(!formDisplay);
-        alert("New Course Successfully Added!");
-    };
-
-    const deleteCourse = (courseId: string) => {
-        setCourses(courses.filter((course) => course._id !== courseId));
-        alert("Course was successfully deleted!")
-    };
-
-    const updateCourse = () => {
-        setCourses(
-            courses.map((c) => {
-                if (c._id === course._id) {
-                    toggleForm();
-                    alert("Course was successfully updated!")
-                    return course;
-                } else {
-                    return c;
-                }
-            })
-        );
-    };
-
 
     const toggleForm = () => {
         setAddButtonDisplay(!addButtonDisplay);
         setAddFormDisplay(!formDisplay);
     }
 
+    const onClickUpdate = () => {
+        updateCourse();
+        toggleForm();
+    }
+
+    const onClickAdd = () => {
+        addNewCourse();
+        toggleForm();
+    }
 
 
     return (
@@ -131,11 +108,11 @@ function Dashboard() {
                                 <input value={course.endDate} className="form-control" type="date" placeholder="Please enter the end date"
                                        onChange={(e) => setCourse({...course, endDate: e.target.value})}/>
                                 <br/>
-                                <button className="btn btn-primary" onClick={addNewCourse}>
+                                <button className="btn btn-primary" onClick={onClickAdd}>
                                     Add
                                 </button>
                                 {" "}
-                                <button className="btn btn-success" onClick={updateCourse} >
+                                <button className="btn btn-success" onClick={onClickUpdate} >
                                     Update
                                 </button>
 
@@ -144,8 +121,7 @@ function Dashboard() {
 
                         {addButtonDisplay &&
                             <button className="float-end" onClick={() => {
-                                setAddFormDisplay(!formDisplay);
-                                setAddButtonDisplay(!addButtonDisplay);
+                                toggleForm();
                             }}>
                                 Add new course
                             </button>

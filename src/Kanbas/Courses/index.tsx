@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 import {FaArrowRightFromBracket, FaCircleNodes, FaPerson} from "react-icons/fa6";
 
-function Courses() {
+function Courses({ courses }: { courses: any[]; }) {
     const {courseId} = useParams();
     const { pathname } = useLocation();
     const course = courses.find((course) => course._id === courseId);
