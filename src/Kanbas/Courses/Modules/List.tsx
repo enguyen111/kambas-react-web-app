@@ -9,7 +9,10 @@ function ModuleList() {
     const [moduleList, setModuleList] = useState<any[]>(modules);
     const [formState, setFormState] = useState(false);
     const [addBtnState, setAddBtnState] = useState(true);
+    const [updateBtnState, setUpdateBtnState] = useState(false);
+    const [formAddBtn, setFormAddBtn] = useState(false);
     const [module, setModule] = useState({
+        _id: -1,
         name: "New Module",
         description: "New Description",
         course: courseId,
@@ -29,6 +32,21 @@ function ModuleList() {
         setModuleList(newModuleList);
     };
 
+    const updateModule = () => {
+        const newModuleList = moduleList.map((m) => {
+            if (m._id === module._id) {
+                return module;
+            } else {
+                return m;
+            }
+        });
+        setModuleList(newModuleList);
+        setFormState(false);
+    };
+
+
+
+
     function moduleCount () {
         let count = 0;
         moduleList.map((module) => {
@@ -41,6 +59,8 @@ function ModuleList() {
 
 
     const toggleForm = () => {
+        setUpdateBtnState(false);
+        setFormAddBtn(true);
         setFormState(!formState);
         setAddBtnState(!addBtnState);
     }
@@ -104,10 +124,19 @@ function ModuleList() {
                     />
 
 
-                    <button className="btn btn-primary" onClick={() => {
-                        addModule(module)
-                    }}>Add
-                    </button>
+                    {formAddBtn &&
+                        <button className="btn btn-primary" onClick={() => {
+                            addModule(module)
+                        }}>Add
+                        </button>
+
+                    }
+                    {updateBtnState &&
+                        <button onClick={updateModule}>
+                            Update
+                        </button>
+
+                    }
                     <button style={{marginTop: "10px", marginBottom: "10px"}
                     } className="btn btn-danger" onClick={toggleForm}>Cancel
                     </button>
@@ -129,9 +158,22 @@ function ModuleList() {
                                 <FaEllipsisV className="me-2"/>
                                 {module.name}
 
+                                {" "}
+
                                 <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
                                         onClick={() => deleteModule(module._id)}>
                                     Delete
+                                </button>
+                                {" "}
+                                <button className="btn btn-success rounded-1"
+                                    onClick={(event) => {
+                                        setModule(module);
+                                        setUpdateBtnState(true);
+                                        setFormState(true);
+                                        setAddBtnState(false);
+                                        setFormAddBtn(false);
+                                    }}>
+                                    Edit
                                 </button>
 
 
