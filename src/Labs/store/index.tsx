@@ -17,7 +17,7 @@ export interface LabState {
     };
     addReducer: {
         sum: number;
-    }
+    };
     todosReducer: {
         todos: TodoType[];
         todo: TodoType;

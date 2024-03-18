@@ -20,6 +20,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
     updateCourse: () => void; }) {
     const [formDisplay, setAddFormDisplay] = useState(false);
     const [addButtonDisplay, setAddButtonDisplay] = useState(true);
+    const [formAddBtn, setFormAddBtn] = useState(true);
 
     const toggleForm = () => {
         setAddButtonDisplay(!addButtonDisplay);
@@ -108,9 +109,11 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                                 <input value={course.endDate} className="form-control" type="date" placeholder="Please enter the end date"
                                        onChange={(e) => setCourse({...course, endDate: e.target.value})}/>
                                 <br/>
-                                <button className="btn btn-primary" onClick={onClickAdd}>
-                                    Add
-                                </button>
+                                {formAddBtn &&
+                                    <button className="btn btn-primary" onClick={onClickAdd}>
+                                        Add
+                                    </button>
+                                }
                                 {" "}
                                 <button className="btn btn-success" onClick={onClickUpdate} >
                                     Update
@@ -122,6 +125,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                         {addButtonDisplay &&
                             <button className="float-end" onClick={() => {
                                 toggleForm();
+                                setFormAddBtn(true);
                             }}>
                                 Add new course
                             </button>
@@ -163,6 +167,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                                                 <button className="btn btn-success" onClick={(event) => {
                                                     event.preventDefault();
                                                     setCourse(course);
+                                                    setFormAddBtn(false);
                                                     if (!formDisplay) {
                                                         toggleForm();
                                                     }
