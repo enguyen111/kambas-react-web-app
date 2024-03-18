@@ -42,6 +42,7 @@ function ModuleList() {
         });
         setModuleList(newModuleList);
         setFormState(false);
+        setAddBtnState(true);
     };
 
 
@@ -70,32 +71,32 @@ function ModuleList() {
     return (
         <>
             <div className="float-end">
-                <button>Collapse All</button>
+                <button className="btn border-black">Collapse All</button>
                 {" "}
-                <button>View Progress</button>
+                <button className="btn border-black">View Progress</button>
                 {" "}
 
-                <select style={{padding: "4px"}}>
+                <select style={{padding: "7px"}}>
                     <option>Publish All</option>
                     <option>Unpublish All</option>
                 </select>
                 {" "}
 
-                <button className="wd-add-item-button"><FaPlus/> Module</button>
+                {addBtnState &&
+                    <button className="btn btn-danger  border-black align-content-center " onClick={toggleForm}><FaPlus/> Module</button>
+                }
+
                 {" "}
 
-                <button style={{padding: "1px"}}>
+
+                <button className="btn border-black" >
                     <FaEllipsisV className="ms-2"/>
                 </button>
-                <br/>
-                <br/>
 
-                {addBtnState &&
-                    <button className="float-end btn btn-primary" onClick={toggleForm}>Add Module</button>
-                }
+
+
             </div>
-            <br/>
-            <br/>
+
             <br/>
             <br/>
             {formState &&
@@ -132,7 +133,7 @@ function ModuleList() {
 
                     }
                     {updateBtnState &&
-                        <button onClick={updateModule}>
+                        <button className="btn btn-success" onClick={updateModule}>
                             Update
                         </button>
 
