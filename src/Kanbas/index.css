@@ -23,3 +23,9 @@
     cursor: pointer;
 }
 
+.form-small {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 45%;
+    margin: 20px auto;
+}

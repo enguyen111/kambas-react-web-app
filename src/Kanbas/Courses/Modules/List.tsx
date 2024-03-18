@@ -6,8 +6,31 @@ import {useParams} from "react-router";
 
 function ModuleList() {
     const {courseId} = useParams();
-    const modulesList = modules.filter((module) => module.course === courseId);
-    const [selectedModule, setSelectedModule] = useState(modulesList[0]);
+    const [moduleList, setModuleList] = useState<any[]>(modules);
+    const [formState, setFormState] = useState(false);
+    const [addBtnState, setAddBtnState] = useState(true);
+    const [module, setModule] = useState({
+        name: "New Module",
+        description: "New Description",
+        course: courseId,
+    });
+    const addModule = (module: any) => {
+        const newModule = {
+            ...module,
+            _id: new Date().getTime().toString()
+        };
+        const newModuleList = [newModule, ...moduleList];
+        setModuleList(newModuleList);
+        toggleForm();
+    };
+
+    const toggleForm = () => {
+        setFormState(!formState);
+        setAddBtnState(!addBtnState);
+    }
+
+    //const modulesList = modules.filter((module) => module.course === courseId);
+    const [selectedModule, setSelectedModule] = useState(moduleList[0]);
     return (
         <>
             <div className="float-end">
@@ -28,11 +51,58 @@ function ModuleList() {
                 <button style={{padding: "1px"}}>
                     <FaEllipsisV className="ms-2"/>
                 </button>
+                <br/>
+                <br/>
+
+                {addBtnState &&
+                    <button className="float-end btn btn-primary" onClick={toggleForm}>Add Module</button>
+                }
             </div>
             <br/>
             <br/>
+            <br/>
+            <br/>
+            {formState &&
+                <div className="list-group form-small" id="courseAdder">
+                    <div className="input_title">
+                        Course Editor:
+                    </div>
+
+                    <div className="input_title">
+                        Module Name:
+                    </div>
+                    <input value={module.name} style={{marginBottom: "10px"}}
+                           onChange={(e) => setModule({
+                               ...module, name: e.target.value
+                           })}
+                    />
+
+                    <div className="input_title">
+                        Module Description:
+                    </div>
+
+                    <textarea value={module.description} style={{padding: "10px", marginBottom: "10px"}}
+                              onChange={(e) => setModule({
+                                  ...module, description: e.target.value
+                              })}
+                    />
+
+
+                    <button className="btn btn-primary" onClick={() => {
+                        addModule(module)
+                    }}>Add
+                    </button>
+                    <button style={{marginTop: "10px", marginBottom: "10px"}
+                    } className="btn btn-danger" onClick={toggleForm}>Cancel
+                    </button>
+
+
+                </div>
+            }
+
             <ul className="list-group wd-modules">
-                {modulesList.map((module, index) => (
+
+                {moduleList.filter((module) => module.course === courseId).map((module, index) => (
                     <li key={index}
                         className="list-group-item"
                         onClick={() => setSelectedModule(module)}>
@@ -47,7 +117,10 @@ function ModuleList() {
                         </div>
                         {selectedModule._id === module._id && (
                             <ul className="list-group">
-                                {module.lessons?.map((lesson, index) => (
+                                {module.lessons?.map((lesson: { name: string | number | boolean |
+                                        React.ReactElement<any, string | React.JSXElementConstructor<any>> |
+                                        Iterable<React.ReactNode> | React.ReactPortal | null | undefined; },
+                                                      index: React.Key | null | undefined) => (
                                     <li className="list-group-item" key={index}>
                                         <FaEllipsisV className="me-2"/>
                                         {lesson.name}
