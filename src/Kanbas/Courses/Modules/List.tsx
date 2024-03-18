@@ -23,6 +23,22 @@ function ModuleList() {
         setModuleList(newModuleList);
         toggleForm();
     };
+    const deleteModule = (moduleId: string) => {
+        const newModuleList = moduleList.filter(
+            (module) => module._id !== moduleId );
+        setModuleList(newModuleList);
+    };
+
+    function moduleCount () {
+        let count = 0;
+        moduleList.map((module) => {
+            if (module.course === courseId) {
+                count++;
+            }
+        });
+        return count;
+    }
+
 
     const toggleForm = () => {
         setFormState(!formState);
@@ -39,7 +55,7 @@ function ModuleList() {
                 <button>View Progress</button>
                 {" "}
 
-                <select style={{padding: "4px;"}}>
+                <select style={{padding: "4px"}}>
                     <option>Publish All</option>
                     <option>Unpublish All</option>
                 </select>
@@ -100,41 +116,54 @@ function ModuleList() {
                 </div>
             }
 
-            <ul className="list-group wd-modules">
+            {moduleCount() !== 0 ?
+                <ul className="list-group wd-modules">
 
-                {moduleList.filter((module) => module.course === courseId).map((module, index) => (
-                    <li key={index}
-                        className="list-group-item"
-                        onClick={() => setSelectedModule(module)}>
-                        <div>
-                            <FaEllipsisV className="me-2"/>
-                            {module.name}
-                            <span className="float-end">
+
+                    {moduleList.filter((module) => module.course === courseId).map((module, index) => (
+                        <li key={index}
+                            className="list-group-item"
+                            onClick={() => setSelectedModule(module)}>
+
+                            <div>
+                                <FaEllipsisV className="me-2"/>
+                                {module.name}
+
+                                <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
+                                        onClick={() => deleteModule(module._id)}>
+                                    Delete
+                                </button>
+
+
+                                <span className="float-end">
                 <FaCheckCircle className="text-success"/>
                 <FaPlusCircle className="ms-2"/>
                 <FaEllipsisV className="ms-2"/>
               </span>
-                        </div>
-                        {selectedModule._id === module._id && (
-                            <ul className="list-group">
-                                {module.lessons?.map((lesson: { name: string | number | boolean |
-                                        React.ReactElement<any, string | React.JSXElementConstructor<any>> |
-                                        Iterable<React.ReactNode> | React.ReactPortal | null | undefined; },
-                                                      index: React.Key | null | undefined) => (
-                                    <li className="list-group-item" key={index}>
-                                        <FaEllipsisV className="me-2"/>
-                                        {lesson.name}
-                                        <span className="float-end">
+                            </div>
+                            {selectedModule._id === module._id && (
+                                <ul className="list-group">
+                                    {module.lessons?.map((lesson: {
+                                                              name: string | number | boolean |
+                                                                  React.ReactElement<any, string | React.JSXElementConstructor<any>> |
+                                                                  Iterable<React.ReactNode> | React.ReactPortal | null | undefined;
+                                                          },
+                                                          index: React.Key | null | undefined) => (
+                                        <li className="list-group-item" key={index}>
+                                            <FaEllipsisV className="me-2"/>
+                                            {lesson.name}
+                                            <span className="float-end">
                       <FaCheckCircle className="text-success"/>
                       <FaEllipsisV className="ms-2"/>
                     </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </li>
-                ))}
-            </ul>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
+                </ul>: <h3>No modules to display.</h3>
+            }
         </>
     );
 }
