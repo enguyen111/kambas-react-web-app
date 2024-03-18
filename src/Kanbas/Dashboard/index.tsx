@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import "../index.css"
 import {Link} from "react-router-dom";
-import courseData from "../Database/courses.json"
 import {HiMiniBars3} from "react-icons/hi2";
 import {
     FaBook,
@@ -21,6 +20,8 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
     const [formDisplay, setAddFormDisplay] = useState(false);
     const [addButtonDisplay, setAddButtonDisplay] = useState(true);
     const [formAddBtn, setFormAddBtn] = useState(true);
+    const [formUpdateBtn, setFormUpdateBtn] = useState(true);
+
 
     const toggleForm = () => {
         setAddButtonDisplay(!addButtonDisplay);
@@ -114,9 +115,14 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                                         Add
                                     </button>
                                 }
+                                {formUpdateBtn &&
+                                    <button className="btn btn-success" onClick={onClickUpdate}>
+                                        Update
+                                    </button>
+                                }
                                 {" "}
-                                <button className="btn btn-success" onClick={onClickUpdate} >
-                                    Update
+                                <button className="btn btn-danger" onClick={toggleForm}>
+                                    Cancel
                                 </button>
 
                             </div>
@@ -125,6 +131,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                         {addButtonDisplay &&
                             <button className="float-end" onClick={() => {
                                 toggleForm();
+                                setFormUpdateBtn(false);
                                 setFormAddBtn(true);
                             }}>
                                 Add new course
@@ -168,6 +175,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                                                     event.preventDefault();
                                                     setCourse(course);
                                                     setFormAddBtn(false);
+                                                    setFormUpdateBtn(true);
                                                     if (!formDisplay) {
                                                         toggleForm();
                                                     }
