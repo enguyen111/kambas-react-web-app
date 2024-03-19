@@ -1,52 +1,29 @@
 import React, {useState} from "react";
 import "./index.css";
-import modules from "../../Database/modules.json";
 import {FaEllipsisV, FaCheckCircle, FaPlusCircle, FaPlus} from "react-icons/fa";
 import {useParams} from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    addModule,
+    deleteModule,
+    updateModule,
+    setModule,
+} from "./reducer";
+import {KanbasState} from "../../store";
 
 function ModuleList() {
     const {courseId} = useParams();
-    const [moduleList, setModuleList] = useState<any[]>(modules);
+
+    const moduleList = useSelector((state: KanbasState) =>
+        state.modulesReducer.modules);
+    const module = useSelector((state: KanbasState) =>
+        state.modulesReducer.module);
+    const dispatch = useDispatch();
+
     const [formState, setFormState] = useState(false);
     const [addBtnState, setAddBtnState] = useState(true);
     const [updateBtnState, setUpdateBtnState] = useState(false);
     const [formAddBtn, setFormAddBtn] = useState(false);
-    const [module, setModule] = useState({
-        _id: -1,
-        name: "New Module",
-        description: "New Description",
-        course: courseId,
-    });
-    const addModule = (module: any) => {
-        const newModule = {
-            ...module,
-            _id: new Date().getTime().toString()
-        };
-        const newModuleList = [newModule, ...moduleList];
-        setModuleList(newModuleList);
-        toggleForm();
-    };
-    const deleteModule = (moduleId: string) => {
-        const newModuleList = moduleList.filter(
-            (module) => module._id !== moduleId );
-        setModuleList(newModuleList);
-    };
-
-    const updateModule = () => {
-        const newModuleList = moduleList.map((m) => {
-            if (m._id === module._id) {
-                return module;
-            } else {
-                return m;
-            }
-        });
-        setModuleList(newModuleList);
-        setFormState(false);
-        setAddBtnState(true);
-    };
-
-
-
 
     function moduleCount () {
         let count = 0;
@@ -66,7 +43,6 @@ function ModuleList() {
         setAddBtnState(!addBtnState);
     }
 
-    //const modulesList = modules.filter((module) => module.course === courseId);
     const [selectedModule, setSelectedModule] = useState(moduleList[0]);
     return (
         <>
@@ -83,7 +59,12 @@ function ModuleList() {
                 {" "}
 
                 {addBtnState &&
-                    <button className="btn btn-danger  border-black align-content-center " onClick={toggleForm}><FaPlus/> Module</button>
+                    <button className="btn btn-danger  border-black align-content-center "
+                            onClick={toggleForm}>
+                        <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                            <FaPlus/> <span className="half-tab"></span>Module
+                        </div>
+                    </button>
                 }
 
                 {" "}
@@ -109,9 +90,7 @@ function ModuleList() {
                         Module Name:
                     </div>
                     <input value={module.name} style={{marginBottom: "10px"}}
-                           onChange={(e) => setModule({
-                               ...module, name: e.target.value
-                           })}
+                           onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))}
                     />
 
                     <div className="input_title">
@@ -119,21 +98,26 @@ function ModuleList() {
                     </div>
 
                     <textarea value={module.description} style={{padding: "10px", marginBottom: "10px"}}
-                              onChange={(e) => setModule({
-                                  ...module, description: e.target.value
-                              })}
+                              onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))}
                     />
 
 
                     {formAddBtn &&
-                        <button className="btn btn-primary" onClick={() => {
-                            addModule(module)
-                        }}>Add
+                        <button className="btn btn-primary" onClick={
+                            () => {
+                                dispatch(addModule({...module, course: courseId}));
+                                toggleForm();
+                            }
+                        }>Add
                         </button>
 
                     }
                     {updateBtnState &&
-                        <button className="btn btn-success" onClick={updateModule}>
+                        <button className="btn btn-success" onClick={() => {
+                            dispatch(updateModule(module));
+                            setFormState(false);
+                            setAddBtnState(true);
+                        }}>
                             Update
                         </button>
 
@@ -162,13 +146,13 @@ function ModuleList() {
                                 {" "}
 
                                 <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
-                                        onClick={() => deleteModule(module._id)}>
+                                        onClick={() => dispatch(deleteModule(module._id))}>
                                     Delete
                                 </button>
                                 {" "}
                                 <button className="btn btn-success rounded-1"
                                     onClick={(event) => {
-                                        setModule(module);
+                                        dispatch(setModule(module));
                                         setUpdateBtnState(true);
                                         setFormState(true);
                                         setAddBtnState(false);
