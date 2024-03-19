@@ -5,7 +5,8 @@ import {assignments} from "../../Database";
 import {FaMagnifyingGlass} from "react-icons/fa6";
 import {useDispatch, useSelector} from "react-redux";
 import {KanbasState} from "../../store";
-import {addAssignment, deleteAssignment, setAssignment, updateAssignment} from "./assignmentsReducer";
+import {addAssignment, setAssignment, updateAssignment} from "./assignmentsReducer";
+import AssignmentGroup from "./AssignmentGroup";
 
 function Assignments() {
     const {courseId} = useParams();
@@ -29,12 +30,6 @@ function Assignments() {
         setAssignmentType(event.target.value);
     }
 
-
-    function isEmptyList(aType: string) {
-        const aList = assignmentList.filter((a) => a.course === courseId)
-            .filter((assignment) => assignment.type === aType);
-        return aList.length;
-    }
 
     return (
         <>
@@ -124,240 +119,20 @@ function Assignments() {
 
             </div>
 
-            <ul className="list-group wd-modules">
-                <li className="list-group-item">
-                    <div>
-                        <FaEllipsisV className="me-2"/> ASSIGNMENTS
-                        <span className="float-end">
-                            <span className="border border-dark rounded-pill"
-                                  style={{padding: "2px"}}>40% of Total</span>
-                            {" "}
-                            <FaCheckCircle className="text-success"/>
-                         <FaPlusCircle className="ms-2"/>
+
+            <AssignmentGroup group={"ASSIGNMENT"} courseId={courseId} weight={"40"}
+                             setAssignmentType={setAssignmentType} label={"ASSIGNMENTS"} />
+
+            <AssignmentGroup group={"QUIZ"} courseId={courseId} weight={"10"}
+                              setAssignmentType={setAssignmentType} label={"QUIZZES"}/>
+
+            <AssignmentGroup group={"EXAM"} courseId={courseId} weight={"20"}
+                              setAssignmentType={setAssignmentType} label={"EXAMS"}/>
+
+            <AssignmentGroup group={"PROJECT"} courseId={courseId} weight={"30"}
+                              setAssignmentType={setAssignmentType} label={"PROJECTS"}/>
 
 
-                            <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FaEllipsisV className="ms-2" style={{color: "black"}}/>
-            </button>
-            <div className="dropdown-menu dropdown-menu-right">
-                <Link className="dropdown-item" to="#">Edit</Link>
-                <Link className="dropdown-item" to="#">Speed Grader</Link>
-                <Link className="dropdown-item" to="#">Duplicate</Link>
-                <Link className="dropdown-item" to="#">Delete</Link>
-                <Link className="dropdown-item" to="#">Move To</Link>
-                <Link className="dropdown-item" to="#">Send To</Link>
-                <Link className="dropdown-item" to="#">Copy To</Link>
-                <Link className="dropdown-item" to="#">Share To Commons</Link>
-            </div>
-                        </span>
-                    </div>
-                    {isEmptyList("ASSIGNMENT") !== 0 ?
-                        <ul className="list-group">
-                            {assignmentList.filter((a) => a.course === courseId)
-                                .filter((assignment) => assignment.type === "ASSIGNMENT").map((hw) => (
-                                    <li className="list-group-item" key={hw._id}>
-                                        <FaEllipsisV className="me-2"/>
-                                        <FaPenSquare style={{color: "green"}}/>
-                                        {" "}
-                                        <Link
-                                            to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
-                                        {" "}
-                                        <button className="btn btn-danger  rounded-1"
-                                                style={{padding: "0.4px", margin: "1px"}}
-                                                onClick={() => dispatch(deleteAssignment(hw._id))}>
-                                            Delete
-                                        </button>
-                                        {" "}
-                                        <button className="btn btn-success rounded-1"
-                                            onClick={(event) => {
-                                                dispatch(setAssignment(hw));
-                                                setAssignmentType(hw.type);
-                                            }}>
-                                            Edit
-                                        </button>
-
-
-
-
-                                        <span className="float-end">
-                  <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                                    </li>))}
-                        </ul>: <div style={{background: "white"}}><h5>NO ASSIGNMENTS TO DISPLAY.</h5></div>
-                    }
-                </li>
-            </ul>
-
-
-            <ul className="list-group wd-modules">
-                <li className="list-group-item">
-                    <div>
-                        <FaEllipsisV className="me-2"/> Quizzes
-                        <span className="float-end">
-                            <span className="border border-dark rounded-pill"
-                                  style={{padding: "2px"}}>10% of Total</span>
-                            {" "}
-                            <FaCheckCircle className="text-success"/>
-                         <FaPlusCircle className="ms-2"/>
-                            <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FaEllipsisV className="ms-2" style={{color: "black"}}/>
-            </button>
-            <div className="dropdown-menu dropdown-menu-right">
-                <Link className="dropdown-item" to="#">Edit</Link>
-                <Link className="dropdown-item" to="#">Speed Grader</Link>
-                <Link className="dropdown-item" to="#">Duplicate</Link>
-                <Link className="dropdown-item" to="#">Delete</Link>
-                <Link className="dropdown-item" to="#">Move To</Link>
-                <Link className="dropdown-item" to="#">Send To</Link>
-                <Link className="dropdown-item" to="#">Copy To</Link>
-                <Link className="dropdown-item" to="#">Share To Commons</Link>
-            </div>
-                        </span>
-                    </div>
-                    {isEmptyList("QUIZ") !== 0 ?
-                    <ul className="list-group">
-                        {assignmentList.filter((a) => a.course === courseId)
-                            .filter((assignment) => assignment.type === "QUIZ").map((q) => (
-                                <li className="list-group-item" key={q._id}>
-                                    <FaEllipsisV className="me-2"/>
-                                    <FaPenSquare style={{color: "green"}}/>
-                                    {" "}
-                                    <Link
-                                        to={`/Kanbas/Courses/${courseId}/Assignments/${q._id}`}>{q.title}</Link>
-                                    {" "}
-                                    <button className="btn btn-danger  rounded-1"
-                                            style={{padding: "0.4px", margin: "1px"}}
-                                            onClick={() => dispatch(deleteAssignment(q._id))}>
-                                        Delete
-                                    </button>
-                                    {" "}
-                                    <button className="btn btn-success rounded-1"
-                                        onClick={(event) => {
-                                            dispatch(setAssignment(q));
-                                            setAssignmentType(q.type);
-                                        }}>
-                                        Edit
-                                    </button>
-                                    <span className="float-end">
-                  <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                                </li>))}
-                    </ul>: <div style={{background: "white"}}><h5>NO QUIZZES TO DISPLAY.</h5></div>
-                    }
-                </li>
-            </ul>
-
-            <ul className="list-group wd-modules">
-                <li className="list-group-item">
-                    <div>
-                        <FaEllipsisV className="me-2"/> Exams
-                        <span className="float-end">
-                            <span className="border border-dark rounded-pill"
-                                  style={{padding: "2px"}}>20% of Total</span>
-                            {" "}
-                            <FaCheckCircle className="text-success"/>
-                         <FaPlusCircle className="ms-2"/>
-                            <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FaEllipsisV className="ms-2" style={{color: "black"}}/>
-            </button>
-            <div className="dropdown-menu dropdown-menu-right">
-                <Link className="dropdown-item" to="#">Edit</Link>
-                <Link className="dropdown-item" to="#">Speed Grader</Link>
-                <Link className="dropdown-item" to="#">Duplicate</Link>
-                <Link className="dropdown-item" to="#">Delete</Link>
-                <Link className="dropdown-item" to="#">Move To</Link>
-                <Link className="dropdown-item" to="#">Send To</Link>
-                <Link className="dropdown-item" to="#">Copy To</Link>
-                <Link className="dropdown-item" to="#">Share To Commons</Link>
-            </div>
-                        </span>
-                    </div>
-                    {isEmptyList("EXAM") !== 0 ?
-                    <ul className="list-group">
-                        {assignmentList.filter((a) => a.course === courseId).filter((assignment) => assignment.type === "EXAM").map((e) => (
-                            <li className="list-group-item" key={e._id}>
-                                <FaEllipsisV className="me-2"/>
-                                <FaPenSquare style={{color: "green"}}/>
-                                {" "}
-                                <Link
-                                    to={`/Kanbas/Courses/${courseId}/Assignments/${e._id}`}>{e.title}</Link>
-                                {" "}
-                                <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
-                                        onClick={() => dispatch(deleteAssignment(e._id))}>
-                                    Delete
-                                </button>
-                                {" "}
-                                <button className="btn btn-success rounded-1"
-                                    onClick={(event) => {
-                                        dispatch(setAssignment(e));
-                                        setAssignmentType(e.type);}}>
-                                    Edit
-                                </button>
-
-                                <span className="float-end">
-                  <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                            </li>))}
-                    </ul>: <div style={{background: "white"}}><h5>NO EXAMS TO DISPLAY.</h5></div>}
-                </li>
-            </ul>
-
-            <ul className="list-group wd-modules">
-                <li className="list-group-item">
-                    <div>
-                        <FaEllipsisV className="me-2"/> Project
-                        <span className="float-end">
-                            <span className="border border-dark rounded-pill"
-                                  style={{padding: "2px"}}>30% of Total</span>
-                            {" "}
-                            <FaCheckCircle className="text-success"/>
-                         <FaPlusCircle className="ms-2"/>
-                            <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FaEllipsisV className="ms-2" style={{color: "black"}}/>
-            </button>
-            <div className="dropdown-menu dropdown-menu-right">
-                <Link className="dropdown-item" to="#">Edit</Link>
-                <Link className="dropdown-item" to="#">Speed Grader</Link>
-                <Link className="dropdown-item" to="#">Duplicate</Link>
-                <Link className="dropdown-item" to="#">Delete</Link>
-                <Link className="dropdown-item" to="#">Move To</Link>
-                <Link className="dropdown-item" to="#">Send To</Link>
-                <Link className="dropdown-item" to="#">Copy To</Link>
-                <Link className="dropdown-item" to="#">Share To Commons</Link>
-            </div>
-                        </span>
-                    </div>
-                    {isEmptyList("PROJECT") !== 0 ?
-                    <ul className="list-group">
-                        {assignmentList.filter((a) => a.course === courseId)
-                            .filter((assignment) => assignment.type === "PROJECT").map((p) => (
-                                <li className="list-group-item" key={p._id}>
-                                    <FaEllipsisV className="me-2"/>
-                                    <FaPenSquare style={{color: "green"}}/>
-                                    {" "}
-                                    <Link
-                                        to={`/Kanbas/Courses/${courseId}/Assignments/${p._id}`}>{p.title}</Link>
-                                    {" "}
-                                    <button className="btn btn-danger  rounded-1"
-                                            style={{padding: "0.4px", margin: "1px"}}
-                                            onClick={() => dispatch(deleteAssignment(p._id))}>
-                                        Delete
-                                    </button>
-                                    {" "}
-                                    <button className="btn btn-success rounded-1"
-                                        onClick={(event) => {
-                                            dispatch(setAssignment(p));
-                                            setAssignmentType(p.type);
-                                        }}>
-                                        Edit
-                                    </button>
-                                    <span className="float-end">
-                  <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                                </li>))}
-                    </ul>:<div style={{background: "white"}}><h5>NO PROJECTS TO DISPLAY.</h5></div>}
-                </li>
-            </ul>
 
 
         </>

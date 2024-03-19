@@ -1,22 +1,22 @@
 import {FaCheckCircle, FaEllipsisV, FaPenSquare, FaPlusCircle} from "react-icons/fa";
 import {Link} from "react-router-dom";
-import React, {useState} from "react";
-import {assignments} from "../../Database";
+import React from "react";
+import {deleteAssignment, setAssignment} from "./assignmentsReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {KanbasState} from "../../store";
 
-export default function AssignmentGroup ({group, courseId, weight, setAssignment, setAssignmentType, label}:
+export default function AssignmentGroup ({group, courseId, weight, setAssignmentType, label}:
                                              {
                                                  group: string, courseId: string | undefined, weight: string,
-                                                 setAssignment: ((hw: any) => void), setAssignmentType: ((type: string) => void),
+                                                 setAssignmentType: ((type: string) => void),
                                                  label: string
                                              }
 ){
-    const [assignmentList, setAssignmentList] = useState<any[]>(assignments);
 
-    const deleteAssignment = (assignmentId: string) => {
-        const newAssignmentList = assignmentList.filter(
-            (assignment) => assignment._id !== assignmentId);
-        setAssignmentList(newAssignmentList);
-    };
+    const assignmentList = useSelector((state: KanbasState) =>
+        state.assignmentsReducer.assignments);
+    const dispatch = useDispatch();
+
 
     function isEmptyList(aType: string) {
         const aList = assignmentList.filter((a) => a.course === courseId)
@@ -54,7 +54,6 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                         </span>
                    </div>
                    {isEmptyList(group) !== 0 ?
-
                        <ul className="list-group">
                            {assignmentList.filter((a) => a.course === courseId)
                                .filter((assignment) => assignment.type === group).map((hw) => (
@@ -67,17 +66,20 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                                        {" "}
                                        <button className="btn btn-danger  rounded-1"
                                                style={{padding: "0.4px", margin: "1px"}}
-                                               onClick={() => deleteAssignment(hw._id)}>
+                                               onClick={() => dispatch(deleteAssignment(hw._id))}>
                                            Delete
                                        </button>
                                        {" "}
                                        <button className="btn btn-success rounded-1"
-                                               onClick={(event) => {
-                                                   setAssignment(hw);
+                                               onClick={() => {
+                                                   dispatch(setAssignment(hw));
                                                    setAssignmentType(hw.type);
                                                }}>
                                            Edit
                                        </button>
+
+
+
 
                                        <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
