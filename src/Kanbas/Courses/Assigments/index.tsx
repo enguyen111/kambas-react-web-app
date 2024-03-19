@@ -46,6 +46,18 @@ function Assignments() {
         setAssignmentList(newAssignmentList);
     };
 
+    const updateAssignment = () => {
+        const newAssignmentList = assignmentList.map((a) => {
+            if (a._id === assignment._id) {
+                return assignment;
+            } else {
+                return a;
+            }
+        });
+        setAssignmentList(newAssignmentList);
+    };
+
+
 
     /*
     const assignmentList = assignments.filter((a) => a.course === courseId);
@@ -130,17 +142,21 @@ function Assignments() {
                     Assignment Type:
                 </div>
 
-                <select style={{padding: "7px"}} onChange={(e) => handleTypeChange(e)}>
+                <select style={{padding: "7px"}} onChange={(e) => handleTypeChange(e)} value={assignmentType}>
                     {assignmentTypes.map((type, index) =>
                         (<option key={index} value={type.label}>{type.label}</option>)
                     )}
                 </select>
 
 
+
                 <p>Selected Type: {assignmentType}</p>
                 <button onClick={() => {
                     addAssignment(assignment);
                 }}>Add
+                </button>
+                <button className="btn btn-success rounded-1" onClick={updateAssignment}>
+                    Update
                 </button>
 
 
@@ -190,6 +206,18 @@ function Assignments() {
                                                 onClick={() => deleteAssignment(hw._id)}>
                                             Delete
                                         </button>
+                                        {" "}
+                                        <button className="btn btn-success rounded-1"
+                                            onClick={(event) => {
+                                                setAssignment(hw);
+                                                setAssignmentType(hw.type);
+                                            }}>
+                                            Edit
+                                        </button>
+
+
+
+
                                         <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
                                     </li>))}
@@ -241,6 +269,14 @@ function Assignments() {
                                             onClick={() => deleteAssignment(q._id)}>
                                         Delete
                                     </button>
+                                    {" "}
+                                    <button className="btn btn-success rounded-1"
+                                        onClick={(event) => {
+                                            setAssignment(q);
+                                            setAssignmentType(q.type);
+                                        }}>
+                                        Edit
+                                    </button>
                                     <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
                                 </li>))}
@@ -288,6 +324,13 @@ function Assignments() {
                                 <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
                                         onClick={() => deleteAssignment(e._id)}>
                                     Delete
+                                </button>
+                                {" "}
+                                <button className="btn btn-success rounded-1"
+                                    onClick={(event) => {
+                                        setAssignment(e);
+                                        setAssignmentType(e.type);}}>
+                                    Edit
                                 </button>
 
                                 <span className="float-end">
@@ -338,6 +381,14 @@ function Assignments() {
                                             style={{padding: "0.4px", margin: "1px"}}
                                             onClick={() => deleteAssignment(p._id)}>
                                         Delete
+                                    </button>
+                                    {" "}
+                                    <button className="btn btn-success rounded-1"
+                                        onClick={(event) => {
+                                            setAssignment(p);
+                                            setAssignmentType(p.type);
+                                        }}>
+                                        Edit
                                     </button>
                                     <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
