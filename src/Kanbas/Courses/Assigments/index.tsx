@@ -6,15 +6,45 @@ import {FaMagnifyingGlass} from "react-icons/fa6";
 
 function Assignments() {
     const {courseId} = useParams();
-    const assignmentList = assignments.filter((assignment) => assignment.course === courseId);
+    const [assignmentList, setAssignmentList] = useState<any[]>(assignments);
+    const [assignmentType, setAssignmentType] = useState("ASSIGNMENT");
+    const [assignment, setAssignment] = useState({
+        title: "New Assignment",
+        description: "New Description",
+        type: "ASSIGNMENT",
+        course: courseId,
+    });
+
+    const assignmentTypes = [
+        {label: "ASSIGNMENT"},
+        {label: "QUIZ"},
+        {label: "EXAM"},
+        {label: "PROJECT"}
+    ];
+
+    function handleTypeChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        setAssignmentType(event.target.value);
+    }
+
+    const addAssignment = (assignment: any) => {
+        const newAssignment = { ...assignment,
+            type: assignmentType,
+            _id: new Date().getTime().toString() };
+        console.log(newAssignment);
+
+        const newAssignmentList = [newAssignment, ...assignmentList];
+        console.log(newAssignmentList);
+        setAssignmentList(newAssignmentList);
+    };
+
+    /*
+    const assignmentList = assignments.filter((a) => a.course === courseId);
 
     const homeworkList = assignmentList.filter((assignment) => assignment.type === "ASSIGNMENT");
     const quizList = assignmentList.filter((assignment) => assignment.type === "QUIZ");
     const examList = assignmentList.filter((assignment) => assignment.type === "EXAM");
     const projectList = assignmentList.filter((assignment) => assignment.type === "PROJECT");
-
-
-
+     */
 
 
     //TODO:Refactor based on type and data structure and by weights
@@ -33,7 +63,8 @@ function Assignments() {
                             <span className="dropdown-toggle"></span>
                         </button>
                         <div className="dropdown-menu dropdown-menu-right form-control">
-                            {assignmentList.map((assignment) => (<Link className="dropdown-item" to="#">{assignment.title} </Link>))}
+                            {assignments.filter((a) => a.course === courseId).map((assignment, index) =>
+                                (<Link key={index} className="dropdown-item" to="#">{assignment.title} </Link>))}
                         </div>
                     </div>
                 </div>
@@ -58,14 +89,55 @@ function Assignments() {
             </>
             <br/><br/>
             <br/>
+
+            <div className="list-group form-small" id="assignmentAdder">
+                <div className="input_title">
+                    Assignment Editor:
+                </div>
+                <div className="input_title">
+                    Assignment Title:
+                </div>
+                <input value={assignment.title} style={{marginBottom: "10px"}}
+                       onChange={(e) => setAssignment({
+                           ...assignment, title: e.target.value
+                       })}
+                />
+                <div className="input_title">
+                    Assignment Description:
+                </div>
+                <textarea value={assignment.description} style={{marginBottom: "10px"}}
+                          onChange={(e) => setAssignment({
+                              ...assignment, description: e.target.value
+                          })}
+                />
+                <div className="input_title">
+                    Assignment Type:
+                </div>
+
+                <select style={{padding: "7px"}} onChange={(e) => handleTypeChange(e)}>
+                    {assignmentTypes.map((type, index) =>
+                        (<option key={index} value={type.label}>{type.label}</option>)
+                    )}
+                </select>
+
+
+                <p>Selected Type: {assignmentType}</p>
+                <button onClick={() => {
+                    addAssignment(assignment);
+                }}>Add</button>
+
+
+            </div>
+
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
                     <div>
                         <FaEllipsisV className="me-2"/> ASSIGNMENTS
                         <span className="float-end">
-                            <span className="border border-dark rounded-pill" style={{padding: "2px"}}>40% of Total</span>
+                            <span className="border border-dark rounded-pill"
+                                  style={{padding: "2px"}}>40% of Total</span>
                             {" "}
-                        <FaCheckCircle className="text-success"/>
+                            <FaCheckCircle className="text-success"/>
                          <FaPlusCircle className="ms-2"/>
 
 
@@ -86,16 +158,17 @@ function Assignments() {
                         </span>
                     </div>
                     <ul className="list-group">
-                        {homeworkList.map((hw) => (
-                            <li className="list-group-item" key={hw._id}>
-                                <FaEllipsisV className="me-2"/>
-                                <FaPenSquare style={{color: "green"}}/>
-                                {" "}
-                                <Link
-                                    to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
-                                <span className="float-end">
+                        {assignmentList.filter((a) => a.course === courseId)
+                            .filter((assignment) => assignment.type === "ASSIGNMENT").map((hw) => (
+                                <li className="list-group-item" key={hw._id}>
+                                    <FaEllipsisV className="me-2"/>
+                                    <FaPenSquare style={{color: "green"}}/>
+                                    {" "}
+                                    <Link
+                                        to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
+                                    <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                            </li>))}
+                                </li>))}
                     </ul>
                 </li>
             </ul>
@@ -105,9 +178,10 @@ function Assignments() {
                     <div>
                         <FaEllipsisV className="me-2"/> Quizzes
                         <span className="float-end">
-                            <span className="border border-dark rounded-pill" style={{padding: "2px"}}>10% of Total</span>
+                            <span className="border border-dark rounded-pill"
+                                  style={{padding: "2px"}}>10% of Total</span>
                             {" "}
-                        <FaCheckCircle className="text-success"/>
+                            <FaCheckCircle className="text-success"/>
                          <FaPlusCircle className="ms-2"/>
                             <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,16 +200,17 @@ function Assignments() {
                         </span>
                     </div>
                     <ul className="list-group">
-                        {quizList.map((q) => (
-                            <li className="list-group-item" key={q._id}>
-                                <FaEllipsisV className="me-2"/>
-                                <FaPenSquare style={{color: "green"}}/>
-                                {" "}
-                                <Link
-                                    to={`/Kanbas/Courses/${courseId}/Assignments/${q._id}`}>{q.title}</Link>
-                                <span className="float-end">
+                        {assignmentList.filter((a) => a.course === courseId)
+                            .filter((assignment) => assignment.type === "QUIZ").map((q) => (
+                                <li className="list-group-item" key={q._id}>
+                                    <FaEllipsisV className="me-2"/>
+                                    <FaPenSquare style={{color: "green"}}/>
+                                    {" "}
+                                    <Link
+                                        to={`/Kanbas/Courses/${courseId}/Assignments/${q._id}`}>{q.title}</Link>
+                                    <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                            </li>))}
+                                </li>))}
                     </ul>
                 </li>
             </ul>
@@ -145,9 +220,10 @@ function Assignments() {
                     <div>
                         <FaEllipsisV className="me-2"/> Exams
                         <span className="float-end">
-                            <span className="border border-dark rounded-pill" style={{padding: "2px"}}>20% of Total</span>
+                            <span className="border border-dark rounded-pill"
+                                  style={{padding: "2px"}}>20% of Total</span>
                             {" "}
-                        <FaCheckCircle className="text-success"/>
+                            <FaCheckCircle className="text-success"/>
                          <FaPlusCircle className="ms-2"/>
                             <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,7 +242,7 @@ function Assignments() {
                         </span>
                     </div>
                     <ul className="list-group">
-                        {examList.map((e) => (
+                        {assignmentList.filter((a) => a.course === courseId).filter((assignment) => assignment.type === "EXAM").map((e) => (
                             <li className="list-group-item" key={e._id}>
                                 <FaEllipsisV className="me-2"/>
                                 <FaPenSquare style={{color: "green"}}/>
@@ -185,9 +261,10 @@ function Assignments() {
                     <div>
                         <FaEllipsisV className="me-2"/> Project
                         <span className="float-end">
-                            <span className="border border-dark rounded-pill" style={{padding: "2px"}}>30% of Total</span>
+                            <span className="border border-dark rounded-pill"
+                                  style={{padding: "2px"}}>30% of Total</span>
                             {" "}
-                        <FaCheckCircle className="text-success"/>
+                            <FaCheckCircle className="text-success"/>
                          <FaPlusCircle className="ms-2"/>
                             <button className="btn btn-outline-secondary dropdown-toggle ms-2" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -206,16 +283,17 @@ function Assignments() {
                         </span>
                     </div>
                     <ul className="list-group">
-                        {projectList.map((p) => (
-                            <li className="list-group-item" key={p._id}>
-                                <FaEllipsisV className="me-2"/>
-                                <FaPenSquare style={{color: "green"}}/>
-                                {" "}
-                                <Link
-                                    to={`/Kanbas/Courses/${courseId}/Assignments/${p._id}`}>{p.title}</Link>
-                                <span className="float-end">
+                        {assignmentList.filter((a) => a.course === courseId)
+                            .filter((assignment) => assignment.type === "PROJECT").map((p) => (
+                                <li className="list-group-item" key={p._id}>
+                                    <FaEllipsisV className="me-2"/>
+                                    <FaPenSquare style={{color: "green"}}/>
+                                    {" "}
+                                    <Link
+                                        to={`/Kanbas/Courses/${courseId}/Assignments/${p._id}`}>{p.title}</Link>
+                                    <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                            </li>))}
+                                </li>))}
                     </ul>
                 </li>
             </ul>
