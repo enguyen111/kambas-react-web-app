@@ -3,18 +3,20 @@ import {FaCheckCircle, FaEllipsisV, FaPenSquare, FaPlus, FaPlusCircle} from "rea
 import {Link, useParams} from "react-router-dom";
 import {assignments} from "../../Database";
 import {FaMagnifyingGlass} from "react-icons/fa6";
+import {useDispatch, useSelector} from "react-redux";
+import {KanbasState} from "../../store";
+import {addAssignment, deleteAssignment, setAssignment, updateAssignment} from "./assignmentsReducer";
 
 function Assignments() {
     const {courseId} = useParams();
-    const [assignmentList, setAssignmentList] = useState<any[]>(assignments);
+
+    const assignmentList = useSelector((state: KanbasState) =>
+        state.assignmentsReducer.assignments);
+    const assignment = useSelector((state: KanbasState) =>
+        state.assignmentsReducer.assignment);
+    const dispatch = useDispatch();
+
     const [assignmentType, setAssignmentType] = useState("ASSIGNMENT");
-    const [assignment, setAssignment] = useState({
-        _id: "-1",
-        title: "New Assignment",
-        description: "New Description",
-        type: "ASSIGNMENT",
-        course: courseId,
-    });
 
     const assignmentTypes = [
         {label: "ASSIGNMENT"},
@@ -27,47 +29,6 @@ function Assignments() {
         setAssignmentType(event.target.value);
     }
 
-    const addAssignment = (assignment: any) => {
-        const newAssignment = {
-            ...assignment,
-            type: assignmentType,
-            _id: new Date().getTime().toString()
-        };
-        console.log(newAssignment);
-
-        const newAssignmentList = [newAssignment, ...assignmentList];
-        console.log(newAssignmentList);
-        setAssignmentList(newAssignmentList);
-    };
-
-    const deleteAssignment = (assignmentId: string) => {
-        const newAssignmentList = assignmentList.filter(
-            (assignment) => assignment._id !== assignmentId);
-        setAssignmentList(newAssignmentList);
-    };
-
-    const updateAssignment = () => {
-        const newAssignmentList = assignmentList.map((a) => {
-            if (a._id === assignment._id) {
-                return assignment;
-            } else {
-                return a;
-            }
-        });
-        setAssignmentList(newAssignmentList);
-    };
-
-
-
-    /*
-    const assignmentList = assignments.filter((a) => a.course === courseId);
-
-    const homeworkList = assignmentList.filter((assignment) => assignment.type === "ASSIGNMENT");
-    const quizList = assignmentList.filter((assignment) => assignment.type === "QUIZ");
-    const examList = assignmentList.filter((assignment) => assignment.type === "EXAM");
-    const projectList = assignmentList.filter((assignment) => assignment.type === "PROJECT");
-     */
-
 
     function isEmptyList(aType: string) {
         const aList = assignmentList.filter((a) => a.course === courseId)
@@ -75,7 +36,6 @@ function Assignments() {
         return aList.length;
     }
 
-    //TODO:Refactor based on type and data structure and by weights
     return (
         <>
             <>
@@ -126,17 +86,17 @@ function Assignments() {
                     Assignment Title:
                 </div>
                 <input value={assignment.title} style={{marginBottom: "10px"}}
-                       onChange={(e) => setAssignment({
+                       onChange={(e) => dispatch(setAssignment({
                            ...assignment, title: e.target.value
-                       })}
+                       }))}
                 />
                 <div className="input_title">
                     Assignment Description:
                 </div>
                 <textarea value={assignment.description} style={{marginBottom: "10px"}}
-                          onChange={(e) => setAssignment({
+                          onChange={(e) => dispatch(setAssignment({
                               ...assignment, description: e.target.value
-                          })}
+                          }))}
                 />
                 <div className="input_title">
                     Assignment Type:
@@ -152,10 +112,12 @@ function Assignments() {
 
                 <p>Selected Type: {assignmentType}</p>
                 <button onClick={() => {
-                    addAssignment(assignment);
-                }}>Add
+                    const newAssignment = { ...assignment, course: courseId, type: assignmentType };
+                    dispatch(addAssignment(newAssignment))
+                }
+                }>Add
                 </button>
-                <button className="btn btn-success rounded-1" onClick={updateAssignment}>
+                <button className="btn btn-success rounded-1" onClick={() => dispatch(updateAssignment(assignment))}>
                     Update
                 </button>
 
@@ -203,13 +165,13 @@ function Assignments() {
                                         {" "}
                                         <button className="btn btn-danger  rounded-1"
                                                 style={{padding: "0.4px", margin: "1px"}}
-                                                onClick={() => deleteAssignment(hw._id)}>
+                                                onClick={() => dispatch(deleteAssignment(hw._id))}>
                                             Delete
                                         </button>
                                         {" "}
                                         <button className="btn btn-success rounded-1"
                                             onClick={(event) => {
-                                                setAssignment(hw);
+                                                dispatch(setAssignment(hw));
                                                 setAssignmentType(hw.type);
                                             }}>
                                             Edit
@@ -266,13 +228,13 @@ function Assignments() {
                                     {" "}
                                     <button className="btn btn-danger  rounded-1"
                                             style={{padding: "0.4px", margin: "1px"}}
-                                            onClick={() => deleteAssignment(q._id)}>
+                                            onClick={() => dispatch(deleteAssignment(q._id))}>
                                         Delete
                                     </button>
                                     {" "}
                                     <button className="btn btn-success rounded-1"
                                         onClick={(event) => {
-                                            setAssignment(q);
+                                            dispatch(setAssignment(q));
                                             setAssignmentType(q.type);
                                         }}>
                                         Edit
@@ -322,13 +284,13 @@ function Assignments() {
                                     to={`/Kanbas/Courses/${courseId}/Assignments/${e._id}`}>{e.title}</Link>
                                 {" "}
                                 <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
-                                        onClick={() => deleteAssignment(e._id)}>
+                                        onClick={() => dispatch(deleteAssignment(e._id))}>
                                     Delete
                                 </button>
                                 {" "}
                                 <button className="btn btn-success rounded-1"
                                     onClick={(event) => {
-                                        setAssignment(e);
+                                        dispatch(setAssignment(e));
                                         setAssignmentType(e.type);}}>
                                     Edit
                                 </button>
@@ -379,13 +341,13 @@ function Assignments() {
                                     {" "}
                                     <button className="btn btn-danger  rounded-1"
                                             style={{padding: "0.4px", margin: "1px"}}
-                                            onClick={() => deleteAssignment(p._id)}>
+                                            onClick={() => dispatch(deleteAssignment(p._id))}>
                                         Delete
                                     </button>
                                     {" "}
                                     <button className="btn btn-success rounded-1"
                                         onClick={(event) => {
-                                            setAssignment(p);
+                                            dispatch(setAssignment(p));
                                             setAssignmentType(p.type);
                                         }}>
                                         Edit

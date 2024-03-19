@@ -9,6 +9,7 @@ export interface KanbasState {
     assignmentsReducer: {
         assignments: any[];
         assignment: any;
+        assignmentType: any[];
     };
 }
 const store = configureStore({
