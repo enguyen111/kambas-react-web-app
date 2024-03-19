@@ -9,6 +9,7 @@ function Assignments() {
     const [assignmentList, setAssignmentList] = useState<any[]>(assignments);
     const [assignmentType, setAssignmentType] = useState("ASSIGNMENT");
     const [assignment, setAssignment] = useState({
+        _id: "-1",
         title: "New Assignment",
         description: "New Description",
         type: "ASSIGNMENT",
@@ -27,15 +28,24 @@ function Assignments() {
     }
 
     const addAssignment = (assignment: any) => {
-        const newAssignment = { ...assignment,
+        const newAssignment = {
+            ...assignment,
             type: assignmentType,
-            _id: new Date().getTime().toString() };
+            _id: new Date().getTime().toString()
+        };
         console.log(newAssignment);
 
         const newAssignmentList = [newAssignment, ...assignmentList];
         console.log(newAssignmentList);
         setAssignmentList(newAssignmentList);
     };
+
+    const deleteAssignment = (assignmentId: string) => {
+        const newAssignmentList = assignmentList.filter(
+            (assignment) => assignment._id !== assignmentId);
+        setAssignmentList(newAssignmentList);
+    };
+
 
     /*
     const assignmentList = assignments.filter((a) => a.course === courseId);
@@ -46,6 +56,12 @@ function Assignments() {
     const projectList = assignmentList.filter((assignment) => assignment.type === "PROJECT");
      */
 
+
+    function isEmptyList(aType: string) {
+        const aList = assignmentList.filter((a) => a.course === courseId)
+            .filter((assignment) => assignment.type === aType);
+        return aList.length;
+    }
 
     //TODO:Refactor based on type and data structure and by weights
     return (
@@ -124,7 +140,8 @@ function Assignments() {
                 <p>Selected Type: {assignmentType}</p>
                 <button onClick={() => {
                     addAssignment(assignment);
-                }}>Add</button>
+                }}>Add
+                </button>
 
 
             </div>
@@ -157,21 +174,30 @@ function Assignments() {
             </div>
                         </span>
                     </div>
-                    <ul className="list-group">
-                        {assignmentList.filter((a) => a.course === courseId)
-                            .filter((assignment) => assignment.type === "ASSIGNMENT").map((hw) => (
-                                <li className="list-group-item" key={hw._id}>
-                                    <FaEllipsisV className="me-2"/>
-                                    <FaPenSquare style={{color: "green"}}/>
-                                    {" "}
-                                    <Link
-                                        to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
-                                    <span className="float-end">
+                    {isEmptyList("ASSIGNMENT") !== 0 ?
+                        <ul className="list-group">
+                            {assignmentList.filter((a) => a.course === courseId)
+                                .filter((assignment) => assignment.type === "ASSIGNMENT").map((hw) => (
+                                    <li className="list-group-item" key={hw._id}>
+                                        <FaEllipsisV className="me-2"/>
+                                        <FaPenSquare style={{color: "green"}}/>
+                                        {" "}
+                                        <Link
+                                            to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
+                                        {" "}
+                                        <button className="btn btn-danger  rounded-1"
+                                                style={{padding: "0.4px", margin: "1px"}}
+                                                onClick={() => deleteAssignment(hw._id)}>
+                                            Delete
+                                        </button>
+                                        <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                                </li>))}
-                    </ul>
+                                    </li>))}
+                        </ul>: <div style={{background: "white"}}><h5>NO ASSIGNMENTS TO DISPLAY.</h5></div>
+                    }
                 </li>
             </ul>
+
 
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
@@ -199,6 +225,7 @@ function Assignments() {
             </div>
                         </span>
                     </div>
+                    {isEmptyList("QUIZ") !== 0 ?
                     <ul className="list-group">
                         {assignmentList.filter((a) => a.course === courseId)
                             .filter((assignment) => assignment.type === "QUIZ").map((q) => (
@@ -208,10 +235,17 @@ function Assignments() {
                                     {" "}
                                     <Link
                                         to={`/Kanbas/Courses/${courseId}/Assignments/${q._id}`}>{q.title}</Link>
+                                    {" "}
+                                    <button className="btn btn-danger  rounded-1"
+                                            style={{padding: "0.4px", margin: "1px"}}
+                                            onClick={() => deleteAssignment(q._id)}>
+                                        Delete
+                                    </button>
                                     <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
                                 </li>))}
-                    </ul>
+                    </ul>: <div style={{background: "white"}}><h5>NO QUIZZES TO DISPLAY.</h5></div>
+                    }
                 </li>
             </ul>
 
@@ -241,6 +275,7 @@ function Assignments() {
             </div>
                         </span>
                     </div>
+                    {isEmptyList("EXAM") !== 0 ?
                     <ul className="list-group">
                         {assignmentList.filter((a) => a.course === courseId).filter((assignment) => assignment.type === "EXAM").map((e) => (
                             <li className="list-group-item" key={e._id}>
@@ -249,10 +284,16 @@ function Assignments() {
                                 {" "}
                                 <Link
                                     to={`/Kanbas/Courses/${courseId}/Assignments/${e._id}`}>{e.title}</Link>
+                                {" "}
+                                <button className="btn btn-danger  rounded-1" style={{padding: "0.4px", margin: "1px"}}
+                                        onClick={() => deleteAssignment(e._id)}>
+                                    Delete
+                                </button>
+
                                 <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
                             </li>))}
-                    </ul>
+                    </ul>: <div style={{background: "white"}}><h5>NO EXAMS TO DISPLAY.</h5></div>}
                 </li>
             </ul>
 
@@ -282,6 +323,7 @@ function Assignments() {
             </div>
                         </span>
                     </div>
+                    {isEmptyList("PROJECT") !== 0 ?
                     <ul className="list-group">
                         {assignmentList.filter((a) => a.course === courseId)
                             .filter((assignment) => assignment.type === "PROJECT").map((p) => (
@@ -291,10 +333,16 @@ function Assignments() {
                                     {" "}
                                     <Link
                                         to={`/Kanbas/Courses/${courseId}/Assignments/${p._id}`}>{p.title}</Link>
+                                    {" "}
+                                    <button className="btn btn-danger  rounded-1"
+                                            style={{padding: "0.4px", margin: "1px"}}
+                                            onClick={() => deleteAssignment(p._id)}>
+                                        Delete
+                                    </button>
                                     <span className="float-end">
                   <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
                                 </li>))}
-                    </ul>
+                    </ul>:<div style={{background: "white"}}><h5>NO PROJECTS TO DISPLAY.</h5></div>}
                 </li>
             </ul>
 

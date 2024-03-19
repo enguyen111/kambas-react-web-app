@@ -4,7 +4,7 @@ import { assignments } from "../../Database";
 
 const initialState = {
     assignments: assignments,
-    assignment: { _id: -1, name: "New Assignment 123", description: "New Description" },
+    assignment: { _id: -1, title: "New Assignment 123", description: "New Description", type: "ASSIGNMENT" },
 };
 
 
