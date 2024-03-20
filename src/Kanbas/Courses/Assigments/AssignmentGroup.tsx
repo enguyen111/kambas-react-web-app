@@ -1,9 +1,11 @@
 import {FaCheckCircle, FaEllipsisV, FaPenSquare, FaPlusCircle} from "react-icons/fa";
 import {Link, useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {deleteAssignment, setAssignment} from "./assignmentsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {KanbasState} from "../../store";
+import {Button, Modal} from "react-bootstrap";
+import DeleteModal from "./DeleteModal";
 
 export default function AssignmentGroup ({group, courseId, weight, setAssignmentType, label}:
                                              {
@@ -17,7 +19,14 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
         state.assignmentsReducer.assignments);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [dialogDisplay, setDialogDisplay] = useState(false);
+    const [deleteItem, setDeleteItem] = useState("");
 
+    useEffect(() => {
+        if (deleteItem !== "") {
+            setDialogDisplay(true);
+        }
+    }, [deleteItem]);
 
 
     function isEmptyList(aType: string) {
@@ -25,6 +34,23 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
             .filter((assignment) => assignment.type === aType);
         return aList.length;
     }
+
+    const handleDeleteConfirmation = (idToDelete: string) => {
+        //console.log("Delete me");
+        //console.log(idToDelete);
+        dispatch(deleteAssignment(idToDelete));
+    };
+
+    const handleDeleteAssignment = (idToDelete: string) => {
+        //console.log("hello");
+        //console.log(idToDelete);
+        setDeleteItem(idToDelete);
+        //console.log(deleteItem);
+        //setDialogDisplay(true);
+    }
+
+
+
     return (
        <>
            <ul className="list-group wd-modules">
@@ -68,7 +94,11 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                                        {" "}
                                        <button className="btn btn-danger  rounded-1"
                                                style={{padding: "0.4px", margin: "1px"}}
-                                               onClick={() => dispatch(deleteAssignment(hw._id))}>
+                                               onClick={() => {
+                                                       //dispatch(deleteAssignment(hw._id));
+                                                   //console.log(hw._id);
+                                                   handleDeleteAssignment(hw._id);
+                                               }}>
                                            Delete
                                        </button>
                                        {" "}
@@ -94,6 +124,13 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                    }
                </li>
            </ul>
+           <DeleteModal
+               show={dialogDisplay}
+               onHide={() => setDialogDisplay(false)}
+               onDeleteAssignment={() => handleDeleteConfirmation(deleteItem)}
+           />
+
+
        </>
     );
 }
