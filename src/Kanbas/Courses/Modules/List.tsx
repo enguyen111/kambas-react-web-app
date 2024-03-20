@@ -7,7 +7,7 @@ import {
     addModule,
     deleteModule,
     updateModule,
-    setModule,
+    setModule, cancelModule,
 } from "./reducer";
 import {KanbasState} from "../../store";
 
@@ -123,7 +123,10 @@ function ModuleList() {
 
                     }
                     <button style={{marginTop: "10px", marginBottom: "10px"}
-                    } className="btn btn-danger" onClick={toggleForm}>Cancel
+                    } className="btn btn-danger" onClick={() => {
+                        toggleForm();
+                        dispatch(cancelModule());
+                    }}>Cancel
                     </button>
 
 

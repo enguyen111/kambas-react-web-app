@@ -67,58 +67,13 @@ function Assignments() {
                     </div>
                 </div>
                 <Link className="btn btn-danger float-end"
-                    to={`/Kanbas/Courses/${courseId}/Assignments/${"A" + new Date().getTime().toString()}`}><FaPlus/> Assignment</Link>
+                    to={`/Kanbas/Courses/${courseId}/Assignments/${"A" + new Date().getTime().toString()}/create`}><FaPlus/> Assignment</Link>
 
-                <button className="float-end"><FaPlus/>Group</button>
+                <button className="btn border-black float-end"><FaPlus/>Group</button>
             </>
             <br/><br/>
             <br/>
 
-            <div className="list-group form-small" id="assignmentAdder">
-                <div className="input_title">
-                    Assignment Editor:
-                </div>
-                <div className="input_title">
-                    Assignment Title:
-                </div>
-                <input value={assignment.title} style={{marginBottom: "10px"}}
-                       onChange={(e) => dispatch(setAssignment({
-                           ...assignment, title: e.target.value
-                       }))}
-                />
-                <div className="input_title">
-                    Assignment Description:
-                </div>
-                <textarea value={assignment.description} style={{marginBottom: "10px"}}
-                          onChange={(e) => dispatch(setAssignment({
-                              ...assignment, description: e.target.value
-                          }))}
-                />
-                <div className="input_title">
-                    Assignment Type:
-                </div>
-
-                <select style={{padding: "7px"}} onChange={(e) => handleTypeChange(e)} value={assignmentType}>
-                    {assignmentTypes.map((type, index) =>
-                        (<option key={index} value={type.label}>{type.label}</option>)
-                    )}
-                </select>
-
-
-
-                <p>Selected Type: {assignmentType}</p>
-                <button onClick={() => {
-                    const newAssignment = { ...assignment, course: courseId, type: assignmentType };
-                    dispatch(addAssignment(newAssignment));
-                }
-                }>Add
-                </button>
-                <button className="btn btn-success rounded-1" onClick={() => dispatch(updateAssignment(assignment))}>
-                    Update
-                </button>
-
-
-            </div>
 
 
             <AssignmentGroup group={"ASSIGNMENT"} courseId={courseId} weight={"40"}

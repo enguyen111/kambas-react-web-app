@@ -1,5 +1,5 @@
 import {FaCheckCircle, FaEllipsisV, FaPenSquare, FaPlusCircle} from "react-icons/fa";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {deleteAssignment, setAssignment} from "./assignmentsReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,6 +16,8 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
     const assignmentList = useSelector((state: KanbasState) =>
         state.assignmentsReducer.assignments);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
 
     function isEmptyList(aType: string) {
@@ -62,7 +64,7 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                                        <FaPenSquare style={{color: "green"}}/>
                                        {" "}
                                        <Link
-                                           to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}`}>{hw.title}</Link>
+                                           to={`/Kanbas/Courses/${courseId}/Assignments/${hw._id}/edit`}>{hw.title}</Link>
                                        {" "}
                                        <button className="btn btn-danger  rounded-1"
                                                style={{padding: "0.4px", margin: "1px"}}
@@ -72,8 +74,12 @@ export default function AssignmentGroup ({group, courseId, weight, setAssignment
                                        {" "}
                                        <button className="btn btn-success rounded-1"
                                                onClick={() => {
+                                                   /*
                                                    dispatch(setAssignment(hw));
                                                    setAssignmentType(hw.type);
+
+                                                    */
+                                                   navigate(`/Kanbas/Courses/${courseId}/Assignments/${hw._id}/edit`);
                                                }}>
                                            Edit
                                        </button>

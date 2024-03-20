@@ -3,7 +3,7 @@ import "./index.css"
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {FaCircleCheck} from "react-icons/fa6";
 import {FaCalendar, FaEllipsisV, FaPlus} from "react-icons/fa";
-import {addAssignment, cancelAssignment, setAssignment} from "../assignmentsReducer";
+import {addAssignment, cancelAssignment, setAssignment, updateAssignment} from "../assignmentsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {KanbasState} from "../../../store";
 
@@ -11,7 +11,7 @@ function AssignmentEditor() {
     const { assignmentId } = useParams();
     const assignment = useSelector((state: KanbasState) =>
         state.assignmentsReducer.assignment);
-    const { courseId } = useParams();
+    const { courseId, operation } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -35,10 +35,25 @@ function AssignmentEditor() {
 
     const handleSave = () => {
         const newAssignment = { ...assignment, course: courseId, type: assignmentType };
-        dispatch(addAssignment(newAssignment));
+        if (operation === "create"){
+            dispatch(addAssignment(newAssignment));
+        }
+        else if (operation === "edit"){
+            const updatedAssignment = {
+                ...existingAssignment,
+                title: assignment.title,
+                description: assignment.description,
+                points: assignment.points,
+                initialDueDate: assignment.initialDueDate,
+                initialAvailableDate: assignment.initialAvailableDate,
+                initialUntilDate: assignment.initialUntilDate,
+                type: assignmentType
+            };
+            dispatch(updateAssignment(updatedAssignment));
+        }
+
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
-
 
 
 
@@ -73,9 +88,7 @@ function AssignmentEditor() {
     useEffect(() => {
         renderPrevInfo();
     }, []);
-    //console.log(formTitle);
-    console.log(assignment);
-    console.log(existingAssignment);
+
     return (
 
         <div className="container-fluid " >
