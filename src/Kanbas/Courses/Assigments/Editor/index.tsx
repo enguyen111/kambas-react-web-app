@@ -1,33 +1,83 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./index.css"
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments } from "../../../Database";
 import {FaCircleCheck} from "react-icons/fa6";
 import {FaCalendar, FaEllipsisV, FaPlus} from "react-icons/fa";
+import {addAssignment, cancelAssignment, setAssignment} from "../assignmentsReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {KanbasState} from "../../../store";
 
 function AssignmentEditor() {
     const { assignmentId } = useParams();
-    const assignment = assignments.find(
-        (assignment) => assignment._id === assignmentId
-    );
+    const assignment = useSelector((state: KanbasState) =>
+        state.assignmentsReducer.assignment);
     const { courseId } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const assignmentTypes = [
+        {label: "ASSIGNMENT"},
+        {label: "QUIZ"},
+        {label: "EXAM"},
+        {label: "PROJECT"}
+    ];
 
-    const [title, setTitle] = useState(assignment?.title || "");
-    const [pointValue, setPV] = useState("100" || "");
-    const [initialDueDate, setDD] = useState("Sept. 18, 2023, 11:59 PM" || "");
-    const [initialAvailableDate, setAvailDate] = useState("Sept. 6, 2023, 11:59 PM" || "");
-    const [initialUntilDate, setUntilDate] = useState("");
+    const existingAssignment = useSelector((state: KanbasState) =>
+        state.assignmentsReducer.assignments.find((assignment) => assignment._id === assignmentId)
+    );
+    const [assignmentType, setAssignmentType] = useState(existingAssignment ? existingAssignment.type : "ASSIGNMENT");
+
+    function handleTypeChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        setAssignmentType(event.target.value);
+    }
 
 
 
     const handleSave = () => {
-        console.log("Actually saving assignment TBD in later assignments");
+        const newAssignment = { ...assignment, course: courseId, type: assignmentType };
+        dispatch(addAssignment(newAssignment));
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
 
+
+
+
+    let formTitle = existingAssignment ? existingAssignment.title : assignment.title;
+    let formDescription = existingAssignment ?
+        (existingAssignment.description ? existingAssignment.description: assignment.description) : assignment.description;
+    let formPoints = existingAssignment ?
+        (existingAssignment.points ? existingAssignment.points: assignment.points) : assignment.points;
+    let formInitialDueDate = existingAssignment ?
+        (existingAssignment.initialDueDate ? existingAssignment.initialDueDate: assignment.initialDueDate) : assignment.initialDueDate;
+    let formInitialAvailableDate = existingAssignment ?
+        (existingAssignment.initialAvailableDate ? existingAssignment.initialAvailableDate:
+            assignment.initialAvailableDate) : assignment.initialAvailableDate;
+    let formInitialUntilDate = existingAssignment ?
+        (existingAssignment.initialUntilDate ? existingAssignment.initialUntilDate:
+            assignment.initialUntilDate) : assignment.initialUntilDate;
+
+    function renderPrevInfo() {
+        const updatedAssignment = {
+            ...assignment,
+            title: formTitle,
+            description: formDescription,
+            points: formPoints,
+            initialDueDate: formInitialDueDate,
+            initialAvailableDate: formInitialAvailableDate,
+            initialUntilDate: formInitialUntilDate
+        };
+        dispatch(setAssignment(updatedAssignment));
+    }
+
+
+    useEffect(() => {
+        renderPrevInfo();
+    }, []);
+    //console.log(formTitle);
+    console.log(assignment);
+    console.log(existingAssignment);
     return (
+
         <div className="container-fluid " >
             <div className="float-end">
                 <div className="input-group">
@@ -61,10 +111,12 @@ function AssignmentEditor() {
                 <div className="form-group">
                     <label htmlFor="assignment-input">Assignment Name</label>
                     <input
-                        value={title}
+                        value={assignment.title}
                         className="form-control mb-2"
                         id="assignment-input"
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => dispatch(setAssignment({
+                            ...assignment, title: e.target.value
+                        }))}
                         placeholder="Enter your Assignment Name here"
                     />
                 </div>
@@ -72,7 +124,12 @@ function AssignmentEditor() {
                 <div className="form-group">
                     <label htmlFor="assignment-description"></label>
                     <textarea className="form-control" id="assignment-description"
-                              rows={6} placeholder="Enter your assignment description here..."></textarea>
+                              value={assignment.description}
+                              rows={6} placeholder="Enter your assignment description here..."
+                              onChange={(e) => dispatch(setAssignment({
+                                  ...assignment, description: e.target.value
+                              }))}
+                    ></textarea>
                 </div>
 
                 <br/>
@@ -85,9 +142,11 @@ function AssignmentEditor() {
                             </div>
                             <div className="col-md-9">
                                 <input type="text" className="form-control" id="points"
-                                       onChange={(e) => setPV(e.target.value)}
+                                       onChange={(e) => dispatch(setAssignment({
+                                           ...assignment, points: e.target.value
+                                       }))}
                                        placeholder="Enter the point value of this assignment"
-                                       value={pointValue}/>
+                                       value={assignment.points}/>
                             </div>
 
                         </div>
@@ -103,12 +162,15 @@ function AssignmentEditor() {
                                 <label htmlFor="assignment-groups">Assignment Group</label>
                             </div>
                             <div className="col-md-9">
-                                <select className="form-control" id="assignment-groups">
-                                    <option>ASSIGNMENT</option>
-                                    <option>QUIZ</option>
-                                    <option>EXAM</option>
-                                    <option>PROJECT</option>
+                                <select style={{padding: "7px"}} onChange={(e) => handleTypeChange(e)} value={assignmentType}>
+                                    {assignmentTypes.map((type, index) =>
+                                        (<option key={index} value={type.label}>{type.label}</option>)
+                                    )}
                                 </select>
+
+
+
+                                <p>Selected Type: {assignmentType}</p>
                             </div>
 
                         </div>
@@ -171,8 +233,10 @@ function AssignmentEditor() {
                                                 <label htmlFor="due">Due</label>
                                                 <div className="input-group">
                                                     <input className="form-control" id="due"
-                                                           onChange={(e) => setDD(e.target.value)}
-                                                           value={initialDueDate}/>
+                                                           onChange={(e) => dispatch(setAssignment({
+                                                               ...assignment, initialDueDate: e.target.value
+                                                           }))}
+                                                           value={assignment.initialDueDate}/>
                                                         <span className="input-group-text"><FaCalendar/></span>
                                                 </div>
                                             </div>
@@ -184,8 +248,10 @@ function AssignmentEditor() {
                                                 <label htmlFor="available-from">Available From</label>
                                                 <div className="input-group">
                                                     <input className="form-control" id="available-from"
-                                                           onChange={(e) => setAvailDate(e.target.value)}
-                                                           value={initialAvailableDate}/>
+                                                           onChange={(e) => dispatch(setAssignment({
+                                                               ...assignment, initialAvailableDate: e.target.value
+                                                           }))}
+                                                           value={assignment.initialAvailableDate}/>
                                                         <span className="input-group-text"><FaCalendar/></span>
                                                 </div>
                                             </div>
@@ -193,17 +259,15 @@ function AssignmentEditor() {
                                                 <label htmlFor="until">Until</label>
                                                 <div className="input-group">
                                                     <input className="form-control" id="until"
-                                                           onChange={(e) => setUntilDate(e.target.value)}
-                                                            value={initialUntilDate}
+                                                           onChange={(e) => dispatch(setAssignment({
+                                                               ...assignment, initialUntilDate: e.target.value
+                                                           }))}
+                                                            value={assignment.initialUntilDate}
                                                     />
                                                         <span className="input-group-text"><FaCalendar/></span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="card-footer text-center">
-                                        <FaPlus />
-                                        <span className="half-tab"></span>Add
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +288,7 @@ function AssignmentEditor() {
             <button onClick={handleSave} className="btn btn-success ms-2 float-end">
                 Save
             </button>
-            <Link
+            <Link onClick={() => dispatch(cancelAssignment())}
                 to={`/Kanbas/Courses/${courseId}/Assignments`}
                 className="btn btn-danger float-end"
             >

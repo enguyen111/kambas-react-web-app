@@ -4,7 +4,10 @@ import { assignments } from "../../Database";
 
 const initialState = {
     assignments: assignments,
-    assignment: { _id: -1, title: "New Assignment 123", description: "New Description", type: "ASSIGNMENT" },
+    assignment: { _id: -1, title: "New Assignment 123",
+        description: "New Description", type: "ASSIGNMENT",
+        points: 100, initialDueDate: "Sept. 18, 2023, 11:59 PM",
+        initialAvailableDate: "Sept. 6, 2023, 11:59 PM", initialUntilDate: ""},
 };
 
 
@@ -17,6 +20,7 @@ const assignmentsSlice = createSlice({
                 { ...action.payload, _id: new Date().getTime().toString() },
                 ...state.assignments,
             ];
+            state.assignment = initialState.assignment;
         },
         deleteAssignment: (state, action) => {
             state.assignments = state.assignments.filter(
@@ -35,10 +39,14 @@ const assignmentsSlice = createSlice({
         setAssignment: (state, action) => {
             state.assignment = action.payload;
         },
+
+        cancelAssignment: (state) => {
+            state.assignment = initialState.assignment;
+        }
     },
 });
 
 
 export const { addAssignment, deleteAssignment,
-    updateAssignment, setAssignment } = assignmentsSlice.actions;
+    updateAssignment, setAssignment, cancelAssignment } = assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

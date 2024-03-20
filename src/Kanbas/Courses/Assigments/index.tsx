@@ -66,8 +66,9 @@ function Assignments() {
                         </div>
                     </div>
                 </div>
-                <button className="wd-add-item-button float-end"><FaPlus/> Assignment
-                </button>
+                <Link className="btn btn-danger float-end"
+                    to={`/Kanbas/Courses/${courseId}/Assignments/${"A" + new Date().getTime().toString()}`}><FaPlus/> Assignment</Link>
+
                 <button className="float-end"><FaPlus/>Group</button>
             </>
             <br/><br/>
@@ -108,7 +109,7 @@ function Assignments() {
                 <p>Selected Type: {assignmentType}</p>
                 <button onClick={() => {
                     const newAssignment = { ...assignment, course: courseId, type: assignmentType };
-                    dispatch(addAssignment(newAssignment))
+                    dispatch(addAssignment(newAssignment));
                 }
                 }>Add
                 </button>
